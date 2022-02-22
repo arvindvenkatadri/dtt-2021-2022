@@ -11,12 +11,14 @@ image: https://www.alice-in-wonderland.net/wp-content/uploads/8.jpg
 caption: ''
 preview: yes
 output:
-  blogdown::html_page
+  blogdown::html_page:
+    toc: no
+    keep_md: yes
 description: This workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(tidygraph)
 library(ggraph)
@@ -30,7 +32,7 @@ This workshop taught me something that I would never opt to do on my own. Learni
 
 **This data is about the adoption of Dogs in the US.  The different criteria on which the dogs are adopted is described in this data. The different varieties of breeds and color makes this data interesting.**
 
-```{r read-1 , echo=FALSE}
+```{r read-1}
 allDogDescriptions <- read_csv("./alldogsdescriptions.csv")
 Dogs <- allDogDescriptions %>% select(breed_primary,color_primary,age,sex,size,contact_state) 
 Dogs
@@ -39,7 +41,7 @@ glimpse(Dogs)
 
 **This graph describes the top 10 breeds which are adopted.**
 
-```{r plot-1 , echo=FALSE}
+```{r plot-1}
 Dogs %>% group_by(breed_primary) %>%
   count(name = "number") %>%
   arrange (desc(number)) %>%
@@ -62,7 +64,7 @@ Dogs %>% group_by(breed_primary) %>%
 
 **This data set is based on the TV show 'Friends' , the information collected is based on the conversation and interaction between each person in the chosen episodes.**
 
-```{r read-2 , echo=FALSE}
+```{r read-2}
 friends_nodes <- read_delim("./Friends_nodes .csv" , delim = ",")
 friends_edges <- read_delim("./Friends_edges .csv" , delim = ",")
 friends_nodes
@@ -76,7 +78,7 @@ fn
 
 **Network map.  This is a linear network of communication that shows the frequency of the conversations between each other and the kind of relationships they have among themselves.  The thickness of the lines depicts the strength of their relationship.  The thicker the line, frequent the communication.  Hence, stronger bond.**
 
-```{r plot-2 , echo=FALSE}
+```{r plot-2}
 ggraph(fn, layout = "linear", circular = FALSE) + 
   geom_edge_arc(aes(width = Weight , color = Type ), alpha = 0.8) + 
   scale_edge_width(range = c(0.5, 3)) +
@@ -94,7 +96,7 @@ ggraph(fn, layout = "linear", circular = FALSE) +
 
 **The data set includes the conversations and communications between the characters of the TV show 'Friends'.**
 
-```{r read-3 , echo=FALSE}
+```{r read-3}
 fn %>% activate(nodes) %>% 
   
 mutate(degree = centrality_degree(mode = c("in"))) %>% 
@@ -105,7 +107,7 @@ mutate(degree = centrality_degree(mode = c("in"))) %>%
 
 **The number of conversations each character has with another affects the intensity of the dots and the lines.  The bigger the points, the greater the connections. This explains the degree of the data.  The difference in the thickness of lines shows how many times a conversation has passed through another conversation between a third party.**
 
-```{r plot-3 , echo=FALSE}
+```{r plot-3}
 set_graph_style()
 fn %>% 
 activate(nodes) %>% 
@@ -132,3 +134,6 @@ scale_color_gradient(guide = "legend",
 ## My Course Reflection
 
 This course was all about collecting data , analyzing the data and learning how to represent in a creative visualization.  This class gave me a new direction to present my thoughts.  As this class was taught by the best Arvind , I enjoyed these two weeks of learning R too much.  I am sure R will help me in my later years. 
+
+
+

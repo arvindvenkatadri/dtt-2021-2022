@@ -13,8 +13,6 @@ preview: yes
 output:
   blogdown::html_page:
     toc: no
-    fig_width: 5
-    fig_height: 5
     keep_md: yes
 description: This workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs.
 ---
@@ -60,7 +58,7 @@ This workshop taught me something that I would never opt to do on my own. Learni
 
 **This graph describes the top 10 breeds which are adopted.**
 
-<img src="Index_files/figure-html/plot-1 -1.png" width="480" />
+<img src="index_files/figure-html/plot-1-1.png" width="672" />
 
 **In this graph the tools like reorder, arrange, group by and filter are used.  Trying out the function of scale filler brewer and selecting an appropriate color palette makes this graph more interesting and easy to read too.**
 
@@ -130,43 +128,7 @@ This workshop taught me something that I would never opt to do on my own. Learni
 
 **Network map.  This is a linear network of communication that shows the frequency of the conversations between each other and the kind of relationships they have among themselves.  The thickness of the lines depicts the strength of their relationship.  The thicker the line, frequent the communication.  Hence, stronger bond.**
 
-
-```
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
-## found in Windows font database
-
-## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
-## found in Windows font database
-```
-
-```
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-```
-
-```
-## Warning: ggrepel: 12 unlabeled data points (too many overlaps). Consider
-## increasing max.overlaps
-```
-
-```
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-```
-
-<img src="Index_files/figure-html/plot-2 -1.png" width="480" />
+<img src="index_files/figure-html/plot-2-1.png" width="672" />
 
 ## Graph 3
 
@@ -201,63 +163,11 @@ This workshop taught me something that I would never opt to do on my own. Learni
 
 **The number of conversations each character has with another affects the intensity of the dots and the lines.  The bigger the points, the greater the connections. This explains the degree of the data.  The difference in the thickness of lines shows how many times a conversation has passed through another conversation between a third party.**
 
-
-```
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-```
-
-<img src="Index_files/figure-html/plot-3 -1.png" width="480" />
-
-```
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
-## family not found in Windows font database
-```
-
-<img src="Index_files/figure-html/plot-3 -2.png" width="480" />
+<img src="index_files/figure-html/plot-3-1.png" width="672" /><img src="index_files/figure-html/plot-3-2.png" width="672" />
 
 ## My Course Reflection
 
 This course was all about collecting data , analyzing the data and learning how to represent in a creative visualization.  This class gave me a new direction to present my thoughts.  As this class was taught by the best Arvind , I enjoyed these two weeks of learning R too much.  I am sure R will help me in my later years. 
+
+
+
