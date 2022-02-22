@@ -13,14 +13,13 @@ preview: yes
 output:
   blogdown::html_page:
     toc: no
-    fig_width: 5
+    fig_width: 7
     fig_height: 5
-    keep_md: yes
 description: This workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs.
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE,warning = FALSE)
 library(tidyverse)
 library(tidygraph)
 library(ggraph)
