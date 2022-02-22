@@ -1,0 +1,137 @@
+---
+title: "SNEHA PATEL"
+author: "SNEHA PATEL"
+date: "30/07/2021"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/161.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hey ! I'm Sneha Patel !I will be going to represent what I have done in this workshop based on 'R' 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+library(tidyverse)
+# library(igraph)
+# library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+# library(igraphdata)
+library(tidyverse)
+library(gridExtra)
+library(lubridate)
+library(ggthemes)
+library(mosaicData)
+
+```
+
+## Introduction
+
+Hey ! I'm Sneha Patel !I will be going to represent what I have done in this workshop based on 'R' 
+
+## Graph 1
+
+
+```{r read-1}
+dontlookup_nodes <- read_csv("dontlookup_nodes.csv")
+# here nodes are the names of the characters in the office which are also given a certain Id
+
+dontlookup_edges <- read_csv("dontlookup_edges.csv") # here the edges are the connections of these characters (nodes) with one another
+glimpse(dontlookup_edges)
+glimpse (dontlookup_nodes)
+```
+```{r 2.Create_graph_object}
+ga <- tbl_graph(nodes = dontlookup_nodes,
+                edges = dontlookup_edges, 
+                directed = FALSE)
+ga
+#
+
+## the following data contains the Id , names and more information
+##The following is a weighted graph that metaphorically connotes the magnitude of the connection between the characters 
+```
+
+### The network of the characters showing the weight of the interactions they have had in the movie
+
+```{r Coord_circular}
+# Coord diagram, circular
+ggraph(ga, layout = "linear", circular = TRUE) + 
+  geom_edge_arc(aes(width = Weight), alpha = 0.8) + 
+  scale_edge_width(range = c(0.2, 2)) +
+  geom_node_point(size = 4,colour = "red") + 
+  geom_node_text(aes(label = Name),repel = TRUE, size = 3,
+                 max.overlaps = 10) +
+  labs(edge_width = "weight") +
+  theme_graph()+
+  theme(legend.position = "right", 
+        aspect.ratio = 1)
+```
+
+**Story:** The circular graph does show the interactions each character had with the other. The thickest line is the one shared between the two main characters and that does correlate to what we saw in the movie.
+
+
+
+## Graph 2
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+```{r}
+India_FP <- read_csv(file = "india-food-prices-1.csv")
+India_FP <- India_FP[-1, ]
+India_FP <- India_FP %>% mutate(date= lubridate::as_date(date)) %>% 
+  mutate(price = as.numeric(price),
+         usdprice = as.numeric(usdprice),
+         latitude = as.numeric(latitude),
+         longitude = as.numeric(longitude))
+India_FP
+
+
+```
+
+
+## Comparing the prices of two Indian kitchen staples
+
+```{r Onion vs Tomato Prices}
+#filtering by commodity and city
+India_FP %>% filter(commodity == "Onions" | commodity == "Tomatoes", date > "2009-12-15", unit == "KG", market == "Bengaluru") %>% 
+ggplot(data=., aes(x= date, y = price, color = commodity, fill = commodity))+geom_line()+ labs(title = "The battle of the Indian staples", subtitle = "Onion vs Tomato Prices in Bengaluru over a decade")+ theme_fivethirtyeight()
+
+```
+
+This graph shows the local variation in price of Onions and Tomatoes over a decade. We have made 2 observations through this graph:
+
+*The price of onions has much larger spikes, except in one instance. The spikes tend to be towards the end of the year.
+*The price of tomatoes fluctuate more often within a year.
+
+The sharp increase in Onion prices can be attributed to a decline in Kharif (a crop season post monsoon) production on account of unseasonal rains at harvest times.
+
+
+## Graph 3
+
+
+the graph which I have plotted is about the difference between the height of male and female kids?
+```{r}
+Galton %>% select(sex, height) %>% 
+  ggplot(aes(x = sex, y = height, colour = sex)) + geom_point() + scale_color_brewer(palette = "Set3")
+```
+
+## My Course Reflection
+
+This course was about data visualization and using R to create geometric metaphors
+
+I learnt and got an insight on types of data and types of variables in data. I learnt how to make different types of graphs using R. 
+
+This workshop will help my practice as an aspiring artist and designer because I am a business services and system design student and I have information technology in my course. The digital information I have got this from workshop is going to be very helpful because I have digitally encoded media. Computer languages like R will help me enable the unpacking and manipulating of this data. 

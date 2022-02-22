@@ -1,0 +1,234 @@
+---
+title: "PULKIT KISHORE"
+author: "PULKIT KISHORE"
+date: "20/2/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/121.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: My name is Pulkit Kishore and I was part of the workshop, Digital Thinking Tools
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>My name is Pulkit Kishore and I was part of the workshop, Digital Thinking Tools with Arvind Venkatadri.</p>
+</div>
+<div id="graph-1" class="section level2">
+<h2>Graph 1</h2>
+<p>The datasets I’ve chosen are on high school players that made it to the NBA and other information on their journey to the NBA, and another</p>
+<pre class="r"><code>my_data_1 &lt;- read_csv(&quot;players.csv&quot;)
+glimpse(my_data_1)</code></pre>
+<pre><code>## Rows: 1,873
+## Columns: 30
+## $ name               &lt;chr&gt; &quot;Al Harrington&quot;, &quot;Rashard Lewis&quot;, &quot;Korleone Young&quot;,~
+## $ link               &lt;chr&gt; &quot;/players/h/harrial01.html&quot;, &quot;/players/l/lewisra02.~
+## $ rank               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, ~
+## $ draft_year         &lt;dbl&gt; 1998, 1998, 1998, 2002, 2000, NA, NA, 2000, 2000, N~
+## $ draft_rd           &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ draft_pk           &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ college            &lt;chr&gt; NA, NA, NA, &quot;University of California, Los Angeles&quot;~
+## $ recruit_year       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 199~
+## $ bbrID              &lt;chr&gt; &quot;harrial01&quot;, &quot;lewisra02&quot;, &quot;youngko01&quot;, &quot;gadzuda01&quot;,~
+## $ pick_overall       &lt;dbl&gt; 25, 32, 40, 33, 2, NA, NA, 9, 18, NA, 32, 23, 5, NA~
+## $ pick_number        &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ pick_round         &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ nba_mean_ws48      &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000,~
+## $ nba_mean_vorp      &lt;dbl&gt; 0.5363636, 2.8583333, NA, 0.9000000, 0.4500000, NA,~
+## $ nba_mean_pipm      &lt;dbl&gt; -0.9054545, 1.5325000, NA, 1.5500000, -1.3100000, N~
+## $ nba_mean_wa        &lt;dbl&gt; 2.030000, 7.520833, NA, 4.600000, 0.970000, NA, NA,~
+## $ top_mean_ws48      &lt;dbl&gt; 0.0958000, 0.1556000, NA, 0.1400000, 0.1245000, NA,~
+## $ top_mean_vorp      &lt;dbl&gt; 0.900, 3.780, NA, 0.900, 0.450, NA, NA, 1.000, 1.72~
+## $ top_mean_pipm      &lt;dbl&gt; 0.2820000, 3.1420000, NA, 1.5500000, -1.3100000, NA~
+## $ top_mean_wa        &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA~
+## $ nba_mean_ws48_rank &lt;dbl&gt; 134.36364, 55.91667, NA, 47.00000, 68.50000, NA, NA~
+## $ nba_mean_vorp_rank &lt;dbl&gt; 129.72727, 44.41667, NA, 108.00000, 125.00000, NA, ~
+## $ nba_mean_pipm_rank &lt;dbl&gt; 122.18182, 56.08333, NA, 53.00000, 119.50000, NA, N~
+## $ nba_mean_wa_rank   &lt;dbl&gt; 118.72727, 55.16667, NA, 73.00000, 127.00000, NA, N~
+## $ top_mean_ws48_rank &lt;dbl&gt; 109.6, 32.4, NA, 47.0, 68.5, NA, NA, 60.0, 95.2, NA~
+## $ top_mean_vorp_rank &lt;dbl&gt; 114.0000, 21.8000, NA, 108.0000, 125.0000, NA, NA, ~
+## $ top_mean_pipm_rank &lt;dbl&gt; 86.80, 19.40, NA, 53.00, 119.50, NA, NA, 80.00, 69.~
+## $ top_mean_wa_rank   &lt;dbl&gt; 79.80, 18.20, NA, 73.00, 127.00, NA, NA, 88.00, 75.~
+## $ total_seasons      &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA~
+## $ valid_seasons      &lt;dbl&gt; 11, 12, 0, 1, 2, NA, NA, 3, 7, NA, 0, 11, 11, NA, N~</code></pre>
+<p>Describe briefly what graph you are going to plot</p>
+<pre class="r"><code>players &lt;- my_data_1 %&gt;% drop_na()
+ggplot(players, 
+       mapping = aes(x = pick_overall, 
+           y = rank)) + 
+  geom_point() +
+  
+    facet_wrap(~draft_year) +
+
+  ggtitle(&quot;Graph of Rank VS draft pick over the years&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-1-1.png" width="480" /></p>
+<p>This graph shows how the pick overall number and high school rank has changed per year. the geometric aesthetics i used were facet wrap to show the change over the years.</p>
+</div>
+<div id="graph-2" class="section level2">
+<h2>Graph 2</h2>
+<p>This dataset tells about the journey high school baskletball players make in their potential NBA careers. it does so using highschool rank, college recruit year, college name, NBA pick overall, total seasons and other such columns.</p>
+<pre class="r"><code>my_data_2 &lt;- read_csv(&quot;players.csv&quot;)
+glimpse(my_data_2)</code></pre>
+<pre><code>## Rows: 1,873
+## Columns: 30
+## $ name               &lt;chr&gt; &quot;Al Harrington&quot;, &quot;Rashard Lewis&quot;, &quot;Korleone Young&quot;,~
+## $ link               &lt;chr&gt; &quot;/players/h/harrial01.html&quot;, &quot;/players/l/lewisra02.~
+## $ rank               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, ~
+## $ draft_year         &lt;dbl&gt; 1998, 1998, 1998, 2002, 2000, NA, NA, 2000, 2000, N~
+## $ draft_rd           &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ draft_pk           &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ college            &lt;chr&gt; NA, NA, NA, &quot;University of California, Los Angeles&quot;~
+## $ recruit_year       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 199~
+## $ bbrID              &lt;chr&gt; &quot;harrial01&quot;, &quot;lewisra02&quot;, &quot;youngko01&quot;, &quot;gadzuda01&quot;,~
+## $ pick_overall       &lt;dbl&gt; 25, 32, 40, 33, 2, NA, NA, 9, 18, NA, 32, 23, 5, NA~
+## $ pick_number        &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ pick_round         &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ nba_mean_ws48      &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000,~
+## $ nba_mean_vorp      &lt;dbl&gt; 0.5363636, 2.8583333, NA, 0.9000000, 0.4500000, NA,~
+## $ nba_mean_pipm      &lt;dbl&gt; -0.9054545, 1.5325000, NA, 1.5500000, -1.3100000, N~
+## $ nba_mean_wa        &lt;dbl&gt; 2.030000, 7.520833, NA, 4.600000, 0.970000, NA, NA,~
+## $ top_mean_ws48      &lt;dbl&gt; 0.0958000, 0.1556000, NA, 0.1400000, 0.1245000, NA,~
+## $ top_mean_vorp      &lt;dbl&gt; 0.900, 3.780, NA, 0.900, 0.450, NA, NA, 1.000, 1.72~
+## $ top_mean_pipm      &lt;dbl&gt; 0.2820000, 3.1420000, NA, 1.5500000, -1.3100000, NA~
+## $ top_mean_wa        &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA~
+## $ nba_mean_ws48_rank &lt;dbl&gt; 134.36364, 55.91667, NA, 47.00000, 68.50000, NA, NA~
+## $ nba_mean_vorp_rank &lt;dbl&gt; 129.72727, 44.41667, NA, 108.00000, 125.00000, NA, ~
+## $ nba_mean_pipm_rank &lt;dbl&gt; 122.18182, 56.08333, NA, 53.00000, 119.50000, NA, N~
+## $ nba_mean_wa_rank   &lt;dbl&gt; 118.72727, 55.16667, NA, 73.00000, 127.00000, NA, N~
+## $ top_mean_ws48_rank &lt;dbl&gt; 109.6, 32.4, NA, 47.0, 68.5, NA, NA, 60.0, 95.2, NA~
+## $ top_mean_vorp_rank &lt;dbl&gt; 114.0000, 21.8000, NA, 108.0000, 125.0000, NA, NA, ~
+## $ top_mean_pipm_rank &lt;dbl&gt; 86.80, 19.40, NA, 53.00, 119.50, NA, NA, 80.00, 69.~
+## $ top_mean_wa_rank   &lt;dbl&gt; 79.80, 18.20, NA, 73.00, 127.00, NA, NA, 88.00, 75.~
+## $ total_seasons      &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA~
+## $ valid_seasons      &lt;dbl&gt; 11, 12, 0, 1, 2, NA, NA, 3, 7, NA, 0, 11, 11, NA, N~</code></pre>
+<p>this graph will show the relationship between the high school rank of a player in High school and the number of valid seasons that they play in the future in the NBA.</p>
+<pre class="r"><code>players &lt;- my_data_2 %&gt;% drop_na()
+
+
+ggplot(players, 
+       mapping = aes(x = rank, 
+           fill = valid_seasons)) +  
+  geom_bar()+
+  ggtitle(&quot;High school rank VS number of valid seasons played&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-2-1.png" width="480" />
+I used geom_bar to represent data with the fill being the valid seasons they play. I used this as i think it effectively conveys the number of players who play such seasons and the rank they have.</p>
+</div>
+<div id="graph-3" class="section level2">
+<h2>Graph 3</h2>
+<p>Network graph made on the TV show “The Boys” where my partner and I created a dataset about the different interactions that each character has with each other.</p>
+<pre class="r"><code>the_boys_nodes &lt;- read_delim(&quot;./The boys Nodes.csv&quot;, delim = &quot;,&quot;)
+the_boys_edges &lt;- read_delim(&quot;./FINAL Edges THE BOYS.csv&quot;, delim = &quot;,&quot;)
+the_boys_nodes</code></pre>
+<pre><code>## # A tibble: 13 x 9
+##       id gender relation species life  race     group     `kill count` name     
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
+##  1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin    
+##  2     2 male   single   human   alive white    the boys             2 hughie   
+##  3     3 female taken    supe    alive white    the seven            1 annie/st~
+##  4     4 male   taken    human   alive white    the boys             7 billy bu~
+##  5     5 male   taken    human   alive black    the boys             0 mothers ~
+##  6     6 male   single   human   alive white    the boys             0 frenchie 
+##  7     7 male   single   supe    alive asian    the boys             8 kimiko   
+##  8     8 male   single   supe    alive white    the seven          159 homeland~
+##  9     9 male   single   supe    alive white    the seven            0 the deep 
+## 10    10 male   single   supe    dead  white    the seven            0 transluc~
+## 11    11 female taken    supe    alive white    the seven            2 queen ma~
+## 12    12 male   single   supe    alive black    the seven            5 black no~
+## 13    13 male   taken    supe    alive black    the seven            2 a-train</code></pre>
+<pre class="r"><code>the_boys_nodes</code></pre>
+<pre><code>## # A tibble: 13 x 9
+##       id gender relation species life  race     group     `kill count` name     
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
+##  1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin    
+##  2     2 male   single   human   alive white    the boys             2 hughie   
+##  3     3 female taken    supe    alive white    the seven            1 annie/st~
+##  4     4 male   taken    human   alive white    the boys             7 billy bu~
+##  5     5 male   taken    human   alive black    the boys             0 mothers ~
+##  6     6 male   single   human   alive white    the boys             0 frenchie 
+##  7     7 male   single   supe    alive asian    the boys             8 kimiko   
+##  8     8 male   single   supe    alive white    the seven          159 homeland~
+##  9     9 male   single   supe    alive white    the seven            0 the deep 
+## 10    10 male   single   supe    dead  white    the seven            0 transluc~
+## 11    11 female taken    supe    alive white    the seven            2 queen ma~
+## 12    12 male   single   supe    alive black    the seven            5 black no~
+## 13    13 male   taken    supe    alive black    the seven            2 a-train</code></pre>
+<pre class="r"><code>glimpse(the_boys_nodes)</code></pre>
+<pre><code>## Rows: 13
+## Columns: 9
+## $ id           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+## $ gender       &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male~
+## $ relation     &lt;chr&gt; &quot;taken&quot;, &quot;single&quot;, &quot;taken&quot;, &quot;taken&quot;, &quot;taken&quot;, &quot;single&quot;, &quot;~
+## $ species      &lt;chr&gt; &quot;human&quot;, &quot;human&quot;, &quot;supe&quot;, &quot;human&quot;, &quot;human&quot;, &quot;human&quot;, &quot;sup~
+## $ life         &lt;chr&gt; &quot;dead&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;ali~
+## $ race         &lt;chr&gt; &quot;biracial&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;black&quot;, &quot;white&quot;, ~
+## $ group        &lt;chr&gt; NA, &quot;the boys&quot;, &quot;the seven&quot;, &quot;the boys&quot;, &quot;the boys&quot;, &quot;the~
+## $ `kill count` &lt;dbl&gt; 0, 2, 1, 7, 0, 0, 8, 159, 0, 0, 2, 5, 2
+## $ name         &lt;chr&gt; &quot;robin&quot;, &quot;hughie&quot;, &quot;annie/starlight&quot;, &quot;billy butcher&quot;, &quot;m~</code></pre>
+<pre class="r"><code>glimpse(the_boys_edges)</code></pre>
+<pre><code>## Rows: 68
+## Columns: 6
+## $ from   &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, ~
+## $ to     &lt;dbl&gt; 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 5, 6, 7, 8, 9, 10, 11, ~
+## $ weight &lt;dbl&gt; 7, 7, 6, 5, 5, 3, 1, 1, 1, 1, 1, 1, 6, 6, 4, 1, 1, 1, 1, 1, 1, ~
+## $ type   &lt;chr&gt; &quot;love&quot;, &quot;love&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;enemy&quot;~
+## $ name1  &lt;chr&gt; &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hu~
+## $ name2  &lt;chr&gt; &quot;robin&quot;, &quot;annie/starlight&quot;, &quot;billy butcher&quot;, &quot;mothers milk&quot;, &quot;f~</code></pre>
+<pre class="r"><code>tb &lt;- tbl_graph(nodes = the_boys_nodes,
+                edges = the_boys_edges, 
+                directed = FALSE)
+tb</code></pre>
+<pre><code>## # A tbl_graph: 13 nodes and 68 edges
+## #
+## # An undirected simple graph with 1 component
+## #
+## # Node Data: 13 x 9 (active)
+##      id gender relation species life  race     group     `kill count` name      
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     
+## 1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin     
+## 2     2 male   single   human   alive white    the boys             2 hughie    
+## 3     3 female taken    supe    alive white    the seven            1 annie/sta~
+## 4     4 male   taken    human   alive white    the boys             7 billy but~
+## 5     5 male   taken    human   alive black    the boys             0 mothers m~
+## 6     6 male   single   human   alive white    the boys             0 frenchie  
+## # ... with 7 more rows
+## #
+## # Edge Data: 68 x 6
+##    from    to weight type   name1  name2          
+##   &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;          
+## 1     1     2      7 love   hughie robin          
+## 2     2     3      7 love   hughie annie/starlight
+## 3     2     4      6 friend hughie billy butcher  
+## # ... with 65 more rows</code></pre>
+<p>I am plotting a network graph connecting the different characters within the story of the TV show “The Boys”.</p>
+<pre class="r"><code>ggraph(graph = tb, layout = &quot;fr&quot;) +
+  geom_edge_link0() + 
+  
+  geom_node_point() + 
+   geom_node_label(aes(label = name), # modify this mapping
+                  repel = TRUE, max.overlaps = 20,
+                 alpha = 0.6,
+                size = 3) </code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="480" />
+I learnt about the connection made within the dataset I made and how the fictional characters are connected to each other, enhancing and analysing the plot of the show</p>
+</div>
+<div id="my-course-reflection" class="section level2">
+<h2>My Course Reflection</h2>
+<p>This course was about data visualization where we used R programming to create plots and use datasets to form stories. I found that making such graphs really helped bring a story to life as it made it easier for the viewers to understand patterns within datasets and thier implications.</p>
+<p>I learnt that networking and making these graphs is useful in any situation and environment. I learnt the techincal skills required to preliminarily code in R using packages and datasets from the internet. Finally i learnt how to make a new dataset of my own, forming columns and rows.</p>
+<p>It will help me as a designer as it allows me to make graphs using code, and have the freedom to conduct research and analyse the data found to create stories and more effectively send my message</p>
+<p>Arvind is a horrible teacher and simply does not get what we need. Only Arvind should be allowed to teach more in Srishti.</p>
+<p>Etc.</p>
+<p>Jai Hind.</p>
+</div>

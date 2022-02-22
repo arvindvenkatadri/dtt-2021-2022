@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Creative Portfolio</title>
+<meta name="description" content="Our Creative Portfolio in R">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://our-wondRland.netlify.app/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="https://our-wondRland.netlify.app/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://our-wondRland.netlify.app/css/owl.carousel.css">
+<link rel="stylesheet" href="https://our-wondRland.netlify.app/css/owl.theme.css">
+
+
+  <link href="https://our-wondRland.netlify.app/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+ 
+
+  
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+
+<link href="https://our-wondRland.netlify.app/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://our-wondRland.netlify.app/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              <div id="sidebar" class="col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="https://our-wondRland.netlify.app">Creative Portfolio</a></h1>
+    
+      <p class="sidebar-p">We are the Class of the R Language Workshop Feb 2022 at SMI, MAHE, Bangalore</p>
+    
+      <p class="sidebar-p">17 Budding Artists, Designers, and Coders.</p>
+    
+    <ul class="sidebar-menu">
+      
+        <li><a href="https://our-wondRland.netlify.app/portfolio/">Home</a></li>
+      
+        <li><a href="https://our-wondRland.netlify.app/about/">About</a></li>
+      
+    </ul>
+    <p class="social">
+  
+  
+  
+  
+  
+  <a href="mailto:email@example.com" data-animate-hover="pulse" class="email">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="full%20profile%20url%20in%20github" data-animate-hover="pulse" class="external">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2021 SMI, MAHE, Bangalore |
+        
+        Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+              
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="https://our-wondRland.netlify.app">Creative Portfolio</a></h1>
+</div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="content-column-content">
+         <h1>PULKIT KISHORE</h1>
+         
+<script src="https://our-wondRland.netlify.app/portfolio/pulkit-kishore/index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>My name is Pulkit Kishore and I was part of the workshop, Digital Thinking Tools with Arvind Venkatadri.</p>
+</div>
+<div id="graph-1" class="section level2">
+<h2>Graph 1</h2>
+<p>The datasets I’ve chosen are on high school players that made it to the NBA and other information on their journey to the NBA, and another</p>
+<pre class="r"><code>my_data_1 &lt;- read_csv(&quot;players.csv&quot;)
+glimpse(my_data_1)</code></pre>
+<pre><code>## Rows: 1,873
+## Columns: 30
+## $ name               &lt;chr&gt; &quot;Al Harrington&quot;, &quot;Rashard Lewis&quot;, &quot;Korleone Young&quot;,~
+## $ link               &lt;chr&gt; &quot;/players/h/harrial01.html&quot;, &quot;/players/l/lewisra02.~
+## $ rank               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, ~
+## $ draft_year         &lt;dbl&gt; 1998, 1998, 1998, 2002, 2000, NA, NA, 2000, 2000, N~
+## $ draft_rd           &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ draft_pk           &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ college            &lt;chr&gt; NA, NA, NA, &quot;University of California, Los Angeles&quot;~
+## $ recruit_year       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 199~
+## $ bbrID              &lt;chr&gt; &quot;harrial01&quot;, &quot;lewisra02&quot;, &quot;youngko01&quot;, &quot;gadzuda01&quot;,~
+## $ pick_overall       &lt;dbl&gt; 25, 32, 40, 33, 2, NA, NA, 9, 18, NA, 32, 23, 5, NA~
+## $ pick_number        &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ pick_round         &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ nba_mean_ws48      &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000,~
+## $ nba_mean_vorp      &lt;dbl&gt; 0.5363636, 2.8583333, NA, 0.9000000, 0.4500000, NA,~
+## $ nba_mean_pipm      &lt;dbl&gt; -0.9054545, 1.5325000, NA, 1.5500000, -1.3100000, N~
+## $ nba_mean_wa        &lt;dbl&gt; 2.030000, 7.520833, NA, 4.600000, 0.970000, NA, NA,~
+## $ top_mean_ws48      &lt;dbl&gt; 0.0958000, 0.1556000, NA, 0.1400000, 0.1245000, NA,~
+## $ top_mean_vorp      &lt;dbl&gt; 0.900, 3.780, NA, 0.900, 0.450, NA, NA, 1.000, 1.72~
+## $ top_mean_pipm      &lt;dbl&gt; 0.2820000, 3.1420000, NA, 1.5500000, -1.3100000, NA~
+## $ top_mean_wa        &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA~
+## $ nba_mean_ws48_rank &lt;dbl&gt; 134.36364, 55.91667, NA, 47.00000, 68.50000, NA, NA~
+## $ nba_mean_vorp_rank &lt;dbl&gt; 129.72727, 44.41667, NA, 108.00000, 125.00000, NA, ~
+## $ nba_mean_pipm_rank &lt;dbl&gt; 122.18182, 56.08333, NA, 53.00000, 119.50000, NA, N~
+## $ nba_mean_wa_rank   &lt;dbl&gt; 118.72727, 55.16667, NA, 73.00000, 127.00000, NA, N~
+## $ top_mean_ws48_rank &lt;dbl&gt; 109.6, 32.4, NA, 47.0, 68.5, NA, NA, 60.0, 95.2, NA~
+## $ top_mean_vorp_rank &lt;dbl&gt; 114.0000, 21.8000, NA, 108.0000, 125.0000, NA, NA, ~
+## $ top_mean_pipm_rank &lt;dbl&gt; 86.80, 19.40, NA, 53.00, 119.50, NA, NA, 80.00, 69.~
+## $ top_mean_wa_rank   &lt;dbl&gt; 79.80, 18.20, NA, 73.00, 127.00, NA, NA, 88.00, 75.~
+## $ total_seasons      &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA~
+## $ valid_seasons      &lt;dbl&gt; 11, 12, 0, 1, 2, NA, NA, 3, 7, NA, 0, 11, 11, NA, N~</code></pre>
+<p>Describe briefly what graph you are going to plot</p>
+<pre class="r"><code>players &lt;- my_data_1 %&gt;% drop_na()
+ggplot(players, 
+       mapping = aes(x = pick_overall, 
+           y = rank)) + 
+  geom_point() +
+  
+    facet_wrap(~draft_year) +
+
+  ggtitle(&quot;Graph of Rank VS draft pick over the years&quot;)</code></pre>
+<p><img src="https://our-wondRland.netlify.app/portfolio/pulkit-kishore/index_files/figure-html/plot-1-1.png" width="480" /></p>
+<p>This graph shows how the pick overall number and high school rank has changed per year. the geometric aesthetics i used were facet wrap to show the change over the years.</p>
+</div>
+<div id="graph-2" class="section level2">
+<h2>Graph 2</h2>
+<p>This dataset tells about the journey high school baskletball players make in their potential NBA careers. it does so using highschool rank, college recruit year, college name, NBA pick overall, total seasons and other such columns.</p>
+<pre class="r"><code>my_data_2 &lt;- read_csv(&quot;players.csv&quot;)
+glimpse(my_data_2)</code></pre>
+<pre><code>## Rows: 1,873
+## Columns: 30
+## $ name               &lt;chr&gt; &quot;Al Harrington&quot;, &quot;Rashard Lewis&quot;, &quot;Korleone Young&quot;,~
+## $ link               &lt;chr&gt; &quot;/players/h/harrial01.html&quot;, &quot;/players/l/lewisra02.~
+## $ rank               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14, ~
+## $ draft_year         &lt;dbl&gt; 1998, 1998, 1998, 2002, 2000, NA, NA, 2000, 2000, N~
+## $ draft_rd           &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ draft_pk           &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ college            &lt;chr&gt; NA, NA, NA, &quot;University of California, Los Angeles&quot;~
+## $ recruit_year       &lt;dbl&gt; 1998, 1998, 1998, 1998, 1998, 1998, 1998, 1998, 199~
+## $ bbrID              &lt;chr&gt; &quot;harrial01&quot;, &quot;lewisra02&quot;, &quot;youngko01&quot;, &quot;gadzuda01&quot;,~
+## $ pick_overall       &lt;dbl&gt; 25, 32, 40, 33, 2, NA, NA, 9, 18, NA, 32, 23, 5, NA~
+## $ pick_number        &lt;dbl&gt; 25, 32, 40, 34, 2, NA, NA, 9, 18, NA, 33, 23, 5, NA~
+## $ pick_round         &lt;dbl&gt; 1, 2, 2, 2, 1, NA, NA, 1, 1, NA, 2, 1, 1, NA, NA, N~
+## $ nba_mean_ws48      &lt;dbl&gt; 0.07390909, 0.13525000, NA, 0.14000000, 0.12450000,~
+## $ nba_mean_vorp      &lt;dbl&gt; 0.5363636, 2.8583333, NA, 0.9000000, 0.4500000, NA,~
+## $ nba_mean_pipm      &lt;dbl&gt; -0.9054545, 1.5325000, NA, 1.5500000, -1.3100000, N~
+## $ nba_mean_wa        &lt;dbl&gt; 2.030000, 7.520833, NA, 4.600000, 0.970000, NA, NA,~
+## $ top_mean_ws48      &lt;dbl&gt; 0.0958000, 0.1556000, NA, 0.1400000, 0.1245000, NA,~
+## $ top_mean_vorp      &lt;dbl&gt; 0.900, 3.780, NA, 0.900, 0.450, NA, NA, 1.000, 1.72~
+## $ top_mean_pipm      &lt;dbl&gt; 0.2820000, 3.1420000, NA, 1.5500000, -1.3100000, NA~
+## $ top_mean_wa        &lt;dbl&gt; 3.946000, 11.672000, NA, 4.600000, 0.970000, NA, NA~
+## $ nba_mean_ws48_rank &lt;dbl&gt; 134.36364, 55.91667, NA, 47.00000, 68.50000, NA, NA~
+## $ nba_mean_vorp_rank &lt;dbl&gt; 129.72727, 44.41667, NA, 108.00000, 125.00000, NA, ~
+## $ nba_mean_pipm_rank &lt;dbl&gt; 122.18182, 56.08333, NA, 53.00000, 119.50000, NA, N~
+## $ nba_mean_wa_rank   &lt;dbl&gt; 118.72727, 55.16667, NA, 73.00000, 127.00000, NA, N~
+## $ top_mean_ws48_rank &lt;dbl&gt; 109.6, 32.4, NA, 47.0, 68.5, NA, NA, 60.0, 95.2, NA~
+## $ top_mean_vorp_rank &lt;dbl&gt; 114.0000, 21.8000, NA, 108.0000, 125.0000, NA, NA, ~
+## $ top_mean_pipm_rank &lt;dbl&gt; 86.80, 19.40, NA, 53.00, 119.50, NA, NA, 80.00, 69.~
+## $ top_mean_wa_rank   &lt;dbl&gt; 79.80, 18.20, NA, 73.00, 127.00, NA, NA, 88.00, 75.~
+## $ total_seasons      &lt;dbl&gt; 16, 16, 1, 10, 9, NA, NA, 13, 13, NA, 1, 14, 17, NA~
+## $ valid_seasons      &lt;dbl&gt; 11, 12, 0, 1, 2, NA, NA, 3, 7, NA, 0, 11, 11, NA, N~</code></pre>
+<p>this graph will show the relationship between the high school rank of a player in High school and the number of valid seasons that they play in the future in the NBA.</p>
+<pre class="r"><code>players &lt;- my_data_2 %&gt;% drop_na()
+
+
+ggplot(players, 
+       mapping = aes(x = rank, 
+           fill = valid_seasons)) +  
+  geom_bar()+
+  ggtitle(&quot;High school rank VS number of valid seasons played&quot;)</code></pre>
+<p><img src="https://our-wondRland.netlify.app/portfolio/pulkit-kishore/index_files/figure-html/plot-2-1.png" width="480" />
+I used geom_bar to represent data with the fill being the valid seasons they play. I used this as i think it effectively conveys the number of players who play such seasons and the rank they have.</p>
+</div>
+<div id="graph-3" class="section level2">
+<h2>Graph 3</h2>
+<p>Network graph made on the TV show “The Boys” where my partner and I created a dataset about the different interactions that each character has with each other.</p>
+<pre class="r"><code>the_boys_nodes &lt;- read_delim(&quot;./The boys Nodes.csv&quot;, delim = &quot;,&quot;)
+the_boys_edges &lt;- read_delim(&quot;./FINAL Edges THE BOYS.csv&quot;, delim = &quot;,&quot;)
+the_boys_nodes</code></pre>
+<pre><code>## # A tibble: 13 x 9
+##       id gender relation species life  race     group     `kill count` name     
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
+##  1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin    
+##  2     2 male   single   human   alive white    the boys             2 hughie   
+##  3     3 female taken    supe    alive white    the seven            1 annie/st~
+##  4     4 male   taken    human   alive white    the boys             7 billy bu~
+##  5     5 male   taken    human   alive black    the boys             0 mothers ~
+##  6     6 male   single   human   alive white    the boys             0 frenchie 
+##  7     7 male   single   supe    alive asian    the boys             8 kimiko   
+##  8     8 male   single   supe    alive white    the seven          159 homeland~
+##  9     9 male   single   supe    alive white    the seven            0 the deep 
+## 10    10 male   single   supe    dead  white    the seven            0 transluc~
+## 11    11 female taken    supe    alive white    the seven            2 queen ma~
+## 12    12 male   single   supe    alive black    the seven            5 black no~
+## 13    13 male   taken    supe    alive black    the seven            2 a-train</code></pre>
+<pre class="r"><code>the_boys_nodes</code></pre>
+<pre><code>## # A tibble: 13 x 9
+##       id gender relation species life  race     group     `kill count` name     
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;    
+##  1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin    
+##  2     2 male   single   human   alive white    the boys             2 hughie   
+##  3     3 female taken    supe    alive white    the seven            1 annie/st~
+##  4     4 male   taken    human   alive white    the boys             7 billy bu~
+##  5     5 male   taken    human   alive black    the boys             0 mothers ~
+##  6     6 male   single   human   alive white    the boys             0 frenchie 
+##  7     7 male   single   supe    alive asian    the boys             8 kimiko   
+##  8     8 male   single   supe    alive white    the seven          159 homeland~
+##  9     9 male   single   supe    alive white    the seven            0 the deep 
+## 10    10 male   single   supe    dead  white    the seven            0 transluc~
+## 11    11 female taken    supe    alive white    the seven            2 queen ma~
+## 12    12 male   single   supe    alive black    the seven            5 black no~
+## 13    13 male   taken    supe    alive black    the seven            2 a-train</code></pre>
+<pre class="r"><code>glimpse(the_boys_nodes)</code></pre>
+<pre><code>## Rows: 13
+## Columns: 9
+## $ id           &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+## $ gender       &lt;chr&gt; &quot;female&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male~
+## $ relation     &lt;chr&gt; &quot;taken&quot;, &quot;single&quot;, &quot;taken&quot;, &quot;taken&quot;, &quot;taken&quot;, &quot;single&quot;, &quot;~
+## $ species      &lt;chr&gt; &quot;human&quot;, &quot;human&quot;, &quot;supe&quot;, &quot;human&quot;, &quot;human&quot;, &quot;human&quot;, &quot;sup~
+## $ life         &lt;chr&gt; &quot;dead&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;alive&quot;, &quot;ali~
+## $ race         &lt;chr&gt; &quot;biracial&quot;, &quot;white&quot;, &quot;white&quot;, &quot;white&quot;, &quot;black&quot;, &quot;white&quot;, ~
+## $ group        &lt;chr&gt; NA, &quot;the boys&quot;, &quot;the seven&quot;, &quot;the boys&quot;, &quot;the boys&quot;, &quot;the~
+## $ `kill count` &lt;dbl&gt; 0, 2, 1, 7, 0, 0, 8, 159, 0, 0, 2, 5, 2
+## $ name         &lt;chr&gt; &quot;robin&quot;, &quot;hughie&quot;, &quot;annie/starlight&quot;, &quot;billy butcher&quot;, &quot;m~</code></pre>
+<pre class="r"><code>glimpse(the_boys_edges)</code></pre>
+<pre><code>## Rows: 68
+## Columns: 6
+## $ from   &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, ~
+## $ to     &lt;dbl&gt; 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 5, 6, 7, 8, 9, 10, 11, ~
+## $ weight &lt;dbl&gt; 7, 7, 6, 5, 5, 3, 1, 1, 1, 1, 1, 1, 6, 6, 4, 1, 1, 1, 1, 1, 1, ~
+## $ type   &lt;chr&gt; &quot;love&quot;, &quot;love&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;friend&quot;, &quot;enemy&quot;~
+## $ name1  &lt;chr&gt; &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hughie&quot;, &quot;hu~
+## $ name2  &lt;chr&gt; &quot;robin&quot;, &quot;annie/starlight&quot;, &quot;billy butcher&quot;, &quot;mothers milk&quot;, &quot;f~</code></pre>
+<pre class="r"><code>tb &lt;- tbl_graph(nodes = the_boys_nodes,
+                edges = the_boys_edges, 
+                directed = FALSE)
+tb</code></pre>
+<pre><code>## # A tbl_graph: 13 nodes and 68 edges
+## #
+## # An undirected simple graph with 1 component
+## #
+## # Node Data: 13 x 9 (active)
+##      id gender relation species life  race     group     `kill count` name      
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;     
+## 1     1 female taken    human   dead  biracial &lt;NA&gt;                 0 robin     
+## 2     2 male   single   human   alive white    the boys             2 hughie    
+## 3     3 female taken    supe    alive white    the seven            1 annie/sta~
+## 4     4 male   taken    human   alive white    the boys             7 billy but~
+## 5     5 male   taken    human   alive black    the boys             0 mothers m~
+## 6     6 male   single   human   alive white    the boys             0 frenchie  
+## # ... with 7 more rows
+## #
+## # Edge Data: 68 x 6
+##    from    to weight type   name1  name2          
+##   &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;          
+## 1     1     2      7 love   hughie robin          
+## 2     2     3      7 love   hughie annie/starlight
+## 3     2     4      6 friend hughie billy butcher  
+## # ... with 65 more rows</code></pre>
+<p>I am plotting a network graph connecting the different characters within the story of the TV show “The Boys”.</p>
+<pre class="r"><code>ggraph(graph = tb, layout = &quot;fr&quot;) +
+  geom_edge_link0() + 
+  
+  geom_node_point() + 
+   geom_node_label(aes(label = name), # modify this mapping
+                  repel = TRUE, max.overlaps = 20,
+                 alpha = 0.6,
+                size = 3) </code></pre>
+<p><img src="https://our-wondRland.netlify.app/portfolio/pulkit-kishore/index_files/figure-html/unnamed-chunk-1-1.png" width="480" />
+I learnt about the connection made within the dataset I made and how the fictional characters are connected to each other, enhancing and analysing the plot of the show</p>
+</div>
+<div id="my-course-reflection" class="section level2">
+<h2>My Course Reflection</h2>
+<p>This course was about data visualization where we used R programming to create plots and use datasets to form stories. I found that making such graphs really helped bring a story to life as it made it easier for the viewers to understand patterns within datasets and thier implications.</p>
+<p>I learnt that networking and making these graphs is useful in any situation and environment. I learnt the techincal skills required to preliminarily code in R using packages and datasets from the internet. Finally i learnt how to make a new dataset of my own, forming columns and rows.</p>
+<p>It will help me as a designer as it allows me to make graphs using code, and have the freedom to conduct research and analyse the data found to create stories and more effectively send my message</p>
+<p>Arvind is a horrible teacher and simply does not get what we need. Only Arvind should be allowed to teach more in Srishti.</p>
+<p>Etc.</p>
+<p>Jai Hind.</p>
+</div>
+
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+          </div>
+      </div>
+  </div>
+  <script src="https://our-wondRland.netlify.app/js/jquery.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/bootstrap.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/jquery.cookie.js"> </script>
+<script src="https://our-wondRland.netlify.app/js/ekko-lightbox.js"></script>
+<script src="https://our-wondRland.netlify.app/js/jquery.scrollTo.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/masonry.pkgd.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/imagesloaded.pkgd.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/owl.carousel.min.js"></script>
+<script src="https://our-wondRland.netlify.app/js/front.js"></script>
+
+
+
+</body>
+</html>

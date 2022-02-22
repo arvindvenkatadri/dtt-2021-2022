@@ -1,0 +1,150 @@
+---
+title: "PULKIT KISHORE"
+author: "PULKIT KISHORE"
+date: "20/2/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/121.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: My name is Pulkit Kishore and I was part of the workshop, Digital Thinking Tools
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+library(tidyverse)
+
+########################################
+# Network Analysis Library (Handle data and Viz)
+# library(igraph)
+# library(netrankr)
+
+########################################
+# For Network "Manipulation"
+library(tidygraph)
+
+# For Network Visualization
+library(ggraph)
+library(graphlayouts)
+
+# For "Network" Datasets
+# library(igraphdata)
+# 
+# library(downloadthis)
+```
+
+## Introduction
+
+My name is Pulkit Kishore and I was part of the workshop, Digital Thinking Tools with Arvind Venkatadri.
+
+## Graph 1
+
+ The datasets I've chosen are on high school players that made it to the NBA and other information on their journey to the NBA, and another
+
+
+
+
+```{r read-1}
+my_data_1 <- read_csv("players.csv")
+glimpse(my_data_1)
+```
+
+Describe briefly what graph you are going to plot
+
+```{r plot-1}
+players <- my_data_1 %>% drop_na()
+ggplot(players, 
+       mapping = aes(x = pick_overall, 
+           y = rank)) + 
+  geom_point() +
+  
+    facet_wrap(~draft_year) +
+
+  ggtitle("Graph of Rank VS draft pick over the years")
+```
+
+This graph shows how the pick overall number and high school rank has changed per year. the geometric aesthetics i used were facet wrap to show the change over the years.
+
+## Graph 2
+
+This dataset tells about the journey high school baskletball players make in their potential NBA careers. it does so using highschool rank, college recruit year, college name, NBA pick overall, total seasons and other such columns.
+
+```{r read-2}
+my_data_2 <- read_csv("players.csv")
+glimpse(my_data_2)
+```
+
+this graph will show the relationship between the high school rank of a player in High school and the number of valid seasons that they play in the future in the NBA.
+```{r plot-2}
+players <- my_data_2 %>% drop_na()
+
+
+ggplot(players, 
+       mapping = aes(x = rank, 
+           fill = valid_seasons)) +  
+  geom_bar()+
+  ggtitle("High school rank VS number of valid seasons played")
+```
+I used geom_bar to represent data with the fill being the valid seasons they play. I used this as i think it effectively conveys the number of players who play such seasons and the rank they have.
+
+## Graph 3
+
+Network graph made on the TV show "The Boys" where my partner and I created a dataset about the different interactions that each character has with each other.
+
+```{r 1.Read-The boys data}
+the_boys_nodes <- read_delim("./The boys Nodes.csv", delim = ",")
+the_boys_edges <- read_delim("./FINAL Edges THE BOYS.csv", delim = ",")
+the_boys_nodes
+the_boys_nodes
+
+glimpse(the_boys_nodes)
+glimpse(the_boys_edges)
+```
+
+
+```{r 2.Create-the boys-graph-object}
+tb <- tbl_graph(nodes = the_boys_nodes,
+                edges = the_boys_edges, 
+                directed = FALSE)
+tb
+
+```
+
+I am plotting a network graph connecting the different characters within the story of the TV show "The Boys".
+```{r}
+
+ggraph(graph = tb, layout = "fr") +
+  geom_edge_link0() + 
+  
+  geom_node_point() + 
+   geom_node_label(aes(label = name), # modify this mapping
+                  repel = TRUE, max.overlaps = 20,
+                 alpha = 0.6,
+                size = 3) 
+  
+  
+```
+I learnt about the connection made within the dataset I made and how the fictional characters are connected to each other, enhancing and analysing the plot of the show
+
+## My Course Reflection
+
+This course was about data visualization where we used R programming to create plots and use datasets to form stories. I found that making such graphs really helped bring a story to life as it made it easier for the viewers to understand patterns within datasets and thier implications.
+
+I learnt that networking and making these graphs is useful in any situation and environment. I learnt the techincal skills required to preliminarily code in R using packages and datasets from the internet. Finally i learnt how to make a new dataset of my own, forming columns and rows. 
+
+It will help me as a designer as it allows me to make graphs using code, and have the freedom to conduct research and analyse the data found to create stories and more effectively send my message
+
+Arvind is a horrible teacher and simply does not get what we need. Only Arvind should be allowed to teach more in Srishti.
+
+Etc.
+
+Jai Hind.

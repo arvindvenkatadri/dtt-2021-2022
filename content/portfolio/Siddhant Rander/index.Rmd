@@ -1,0 +1,221 @@
+---
+title: "SIDDHANT RANDER"
+author: "SIDDHANT RANDER"
+date: "20/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/171.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hello folks! I am Siddhant Rander, and The cool stuff I did inside with graphs and maps and later networking Brooklyn 99 characters is the reason I can say "I love coding"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(osmplotr) 
+library(tmap) 
+library(sf)
+library(tidygraph)
+library(ggraph)
+library(visNetwork)
+
+```
+
+## Introduction
+
+> Hello folks! I am Siddhant Rander, and The cool stuff I did inside with graphs and maps and later networking Brooklyn 99 characters is the reason I can say "I love coding"
+
+## Graph 1
+
+The Banned Items in US contains a dataset of the names of schools, the states they belong to, type of item and the name of item banned in that school.  
+schoolName -> 480 different schools  
+state -> 38 States of USA  
+type -> 14 types of items  
+item -> 1071 different items
+
+```{r read-1}
+my_data_1 <- read.csv(file = "banned_items.csv")
+glimpse(my_data_1)
+```
+
+#### USUAL ITEMS BANNED
+In this data, I have used this data to find out how many schools have banned the things that seem very usual to us and astonished to see it being banned. 
+
+```{r plot-1}
+Usual_items <-
+  my_data_1 %>% filter(
+    item == "sleeveless" |
+      item == "crop top" |
+      item == "beards" |
+      item == "visible tattoos" |
+      item == "goggles" |
+      item == "shorts" |
+      item == "backpacks" |
+      item == "off the shoulder" |
+      item == "headbands" | item == "backless"
+  )
+ggplot(Usual_items) + aes(x = item, fill = type) + geom_bar() + coord_flip() + labs(title = "No. of schools in which some usual things are banned in US")
+```
+
+In this graph, out of the 1071 unique items, I filtered out some items, and plotted it on the graph to see out of 480 schools, how many have banned it. 
+I used the filter command to filter, then used the aesthetics of assigning the _X Axis to items_ and _fill by type of item banned_ to give a better idea of the type. 
+
+It was very interesting to see how backless and crop tops were banned in so many schools, and even something as normal as sleeveless. 
+
+## Graph 2
+
+ 
+
+```{r Reading-Data}
+Indirabuildings <- st_read("./Indirabuildings.gpkg")
+Indiraparks <- st_read("./IndiraParks.gpkg")
+Indiragreenery <- st_read("./IndiraGreenery.gpkg")
+Indiratrees <- st_read("./IndiraTrees.gpkg")
+Indiraroads <- st_read("./IndiraRoads.gpkg")
+Indirarestuarants <- st_read("./restaurantsInIndira279.gpkg")
+
+Indirarestuarants <- Indirarestuarants %>% 
+  drop_na(cuisine) %>% 
+
+separate(col = cuisine, into = c("cuisine", NA, NA), sep = ";") %>% 
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ",") 
+
+```
+
+The below is a map of Indiranagar, Bangalore.  
+Burlywood colours -> buildings
+Grey -> Roads
+Dark Green Shapes -> parks
+Trees -> Light Green
+Restaurants -> Yellow
+
+This is an interactive map.
+
+
+```{r using tmap}
+tmap_mode("plot")
+
+Indirarestuarants <- Indirarestuarants %>% relocate(name)
+
+tm_shape(Indirabuildings) +
+  tm_fill(col = "burlywood1") +
+
+tm_shape(Indiraroads) +
+  tm_lines(col = "grey80") +
+  
+tm_shape(Indiraparks) +
+  tm_polygons(col = "darkgreen") +
+  
+tm_shape(Indiratrees) +
+  tm_dots(col = "darkgreen", ) +
+
+tm_shape(Indirarestuarants) + 
+  tm_dots(col = "yellow")
+
+```
+
+## Network of Brooklyn 99 characters
+
+This is a data of Brooklyn 99 characters and the links and strength of links they have with other characters in the show. Using R's algorithms, it has formed communities and formed the network. 
+
+```{r readb99}
+b99_nodes <- read_delim("./b99_Nodes.csv", delim = ",")
+b99_edges <- read_delim("./b99_Edges.csv", delim = ",")
+```
+
+This graph is an interactive graph of B99 Characters categorised by male and female. It shows the connections of each character. 
+
+```{r}
+
+b99_visualnodes <- b99_nodes %>% 
+  rowid_to_column(var = "id") %>% 
+  rename("label" = name) %>% 
+  mutate(sex = case_when(sex == "F" ~ "Female",sex == "M" ~ "Male")) %>% 
+  rename("group" = sex)
+
+
+b99_visualedges <- b99_edges %>% 
+  select(from, to) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("from" = "label")) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("to" = "label")) %>%
+  select("from"= id.x, "to" = id.y)
+
+b99_visualnodes <- b99_nodes %>% 
+  rowid_to_column(var = "id") %>% 
+  rename("label" = name) %>% 
+  mutate(sex = case_when(sex == "F" ~ "Female",sex == "M" ~ "Male")) %>% 
+  rename("group" = sex)
+
+
+b99_visualedges <- b99_edges %>% 
+  select(from, to) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("from" = "label")) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("to" = "label")) %>%
+  select("from"= id.x, "to" = id.y)
+
+```
+
+
+```{r usingionicons}
+
+  visNetwork(nodes = b99_visualnodes, edges = b99_visualedges,) %>%
+  visLayout(randomSeed = 12345) %>%
+  visNodes(font = list(size = 20)) %>%
+  visEdges(b99_visualedges) %>%
+  visGroups(
+    groupname = "Female",
+    shape = "icon",
+    icon = list(
+      face = 'Ionicons',
+      code = "f25d",
+      color = "lightpink",
+      size = 125
+    )
+  ) %>%
+  
+  visGroups(
+    groupname = "Male",
+    shape = "icon",
+    icon = list(
+      face = 'Ionicons',
+      code = "f202",
+      color = "lightblue",
+      size = 125
+    )
+  ) %>%
+  
+  visLegend() %>%
+  addIonicons() %>%
+  visInteraction(
+    navigationButtons = TRUE,
+    hover = TRUE,
+    selectConnectedEdges = TRUE,
+    hoverConnectedEdges = TRUE,
+    zoomView = TRUE
+  )
+```
+
+
+## My Course Reflection
+
+This course was about using R to plot graphs, maps and networks. 
+
+I learnt about the importance of numbers and the magic data visualisation can do to a human as it makes the data so much easier to read. The things we learnt in 5th Std about plotting graphs and how relevant it is in today's world based on data. I learnt the right ways it could be used and learning to plot networks will be one of the major takeaways from this course as network science can change the way I look at communities, and how small the world could become due to networks.
+
+It will help me be a better designer and one of the use cases I can think of is that as a UX UI designer when I conduct surveys to form personas, the data could be visualised and worked better using R. 
+
+Thank you Arvind for this workshop!

@@ -1,0 +1,147 @@
+---
+title: "My Work on R"
+author: "Niharika Vinuthan"
+date: "20/02/2022"
+slug: []
+categories: []
+tags: []
+image: https://www.alice-in-wonderland.net/wp-content/uploads/1book5.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi there! I'm Niharika and I recently started working with R and using it as a medium for creating different work.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(palmerpenguins)
+library(tidyverse)
+library(RColorBrewer)
+library(readr)
+library(dplyr)
+
+#library(igraph)
+#library(netrankr)
+
+library(tidygraph)
+
+library(ggraph)
+library(graphlayouts)
+
+# library(igraphdata)
+# 
+# library(downloadthis)
+```
+
+## Introduction
+
+Hi there! I'm Niharika and I recently started working with R and using it as a medium for creating different work. I've never been a fan of coding and when I first started this course, I was uncertain about how it'd work for me but I decided to keep an open mind and work with it. But it turns out, that coding isn't actually that bad and this course has actually been one of my favorites so far. I'm glad I got to work with Arvind and everyone in class on this and it's definitely something I'm going to use in the future!  
+
+Here you'll find some graphs/networks that I've worked on during the entire course of learning R. I'm including my favorite ones so far!
+
+## Graph 1 - Plotting penguins: Islands vs Sex
+
+The first dataset I chose is that of penguins. The columns include species, island, bill length, bill depth, flipper length, body mass, sex and year. the names of these columns are with reference to the penguins and answer questions like which island has the most male penguins? Or which species of penguins has the largest flipper length? 
+
+```{r read-1}
+names(penguins) # Column, i.e. Variable names
+head(penguins) # first six rows
+tail(penguins) # Last six rows
+dim(penguins) # Size of dataset
+
+# Check for missing data
+any(is.na(penguins) == TRUE)
+glimpse(penguins)
+```
+
+I'm going to be plotting a geom_density graph which compares the sex and island variables of the dataset. This graph answers the metaquestion: Which sex of penguins is prominent on each island?
+
+```{r plot-1}
+ggplot(penguins) + geom_density(aes(x = sex, 
+                                fill = island),
+                            position = "stack")
+```
+**Conclusion -The graph shows that overall the female penguins populate the islands more than the male penguins.**
+
+## Graph 2 - Graph on Fictional characters: How much do the ratings vary with avg for each character?
+
+The second dataset that I chose was the dataset on personalities of Fictional Characters. The columns include character_code, fictional_work, character_name, gender, spectrum, spectrum_low, spectrum_high, avg, ratings and sd (dropped column is is_emoji). Each of these columns directly correlate to the different characteristics of the fictional characters and helps us in comparing interesting factors such as spectrum, sd or character code.
+
+```{r read-2}
+Fic_char <- read_delim("personalities.tsv",
+    delim = "\t", escape_double = FALSE, 
+    trim_ws = TRUE)
+
+Fic_char <- Fic_char %>% dplyr::rename("avg" = mean)
+```
+```{r Dataset intro}
+data(Fic_char)
+names(Fic_char)
+glimpse(Fic_char)
+unique(Fic_char$gender)
+unique(Fic_char$spectrum) %>% length()
+unique(Fic_char$spectrum_low) %>% length()
+unique(Fic_char$spectrum_high) %>% length()
+range(Fic_char$ratings)
+```
+
+I plotted a geom_line graph comparing the ratings and average for each fictional character. I felt like the graph kind of looked like a slinky.
+
+```{r plot-2}
+# How much do the ratings vary with avg for each character?
+ggplot(Fic_char) +
+  geom_line(aes(x = ratings, y = avg, colour = sd))
+```
+
+**Conclusion -The corelation of the ratings varying with the mean of each character.**
+
+## Network - 1
+
+The third dataset that I chose was the Brooklyn-99 data set that my partner and I made. The different columns include Code, Name, Gender, Occupation, Height, personality, type of relationship, etc. 
+This dataset helped us make a network connecting all the characters of Brooklyn-99 depending on what kind of relationship they share and how strong that relationship is.
+
+```{r read-3}
+b99_nodes <- read_delim("b99Nodes.csv", delim = ",")
+b99_nodes
+b99_edges <- read_delim("b99Edges.csv", delim = ",")
+b99_edges
+```
+
+```{r}
+b99 <- tbl_graph(nodes = b99_nodes, 
+                edges = b99_edges, 
+                directed = FALSE)
+b99
+```
+
+We plotted a network to show the different kinds of relationships and the strength of those relationships between the characters of Brooklyn 99. 
+
+```{r plot-3}
+ggraph(b99, layout = "linear") +
+  geom_edge_arc(aes(width = weight, color = type_of_R), alpha = 0.8) +
+  scale_edge_width(range = c(0.2, 2)) + 
+  geom_node_point(size = 3, colour = "black") +
+  labs(edge_width = "Weight") +
+  theme_graph()+
+  theme(legend.position = "top")
+```
+**Conclusion - A lot of the characters dislike each other and few are dating/in relationships and quite a few are friends.**
+
+## My Course Reflection
+
+This course was about exploring R as a programming language, understanding it's applications and in turn using it in our work in the future. It was like learning a hack that makes doing a bunch of things easier, especially as aspiring artists and designers.
+
+What I learnt: I learnt that coding isn't so bad after all. In my head it was always like "Ugh coding, sitting in front of a screen all day, not something I want to do", but I actually did end up enjoying a lot of the things we learnt in this course. Apart from the frustrating errors and the fact that the absence of a single comma means the entire code won't run, I realized that coding is actually a shortcut to doing a lot of things that would otherwise take ages to complete. So overall, this course actually changed my view on coding and I'm pretty sure I'm going to use R in the future even though I'm Arvind's VC student :)
+
+How it will help my practice as an aspiring artist and designer: R is capable of doing so much more than I thought. Like Arvind began in the first class, with showing off about R and everything possible with it, I realized that there's really no limit. There's no way that R won't be helpful to artists or designers because it can literally do everything (except be a little more gen z haha). Even though I'm a VC student, I can see myself using R in the future whether it's for plotting a graph to analyse some kind of data or just mapping out how many taco bells have opened up in my city. 
+
+Even though Arvind is a boomer (bleh), He's without doubt my favorite boomer of all time (maybe second favorite after grandma who makes the best chicken biryani, but favorite nonetheless). I've told everyone around me how much I loved being in his class and people are probably fed up of hearing me say it. It felt like being in school again and having a close knit classroom with a teacher that actually cares about us. Thank you Arvind for the endless effort and work you put into your classes, you should know that we really do appreciate it. Thank you for the pep talks, the advice, the chocolates and for setting an example for us. Even though it was only a two week course, I felt like I've known you and everyone in class since forever. I know you said that out of 700 students only 20 kept in touch with you and that we shouldn't feel bad about not keeping in touch, but I promise to be the 21st student in that list. I'm not going to let you forget your VC student. Thanks for the best class ever.
+
+All hail Alice in wonderland 
+
+Jai Hind.

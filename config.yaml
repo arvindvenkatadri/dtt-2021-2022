@@ -1,0 +1,40 @@
+baseurl: https://our-wondRland.netlify.app
+title: Creative Portfolio
+theme: hugo-creative-portfolio-theme
+languageCode: en-us
+disqusShortname: ''
+googleAnalytics: ''
+params:
+  copyright: '&copy;2021 SMI, MAHE, Bangalore'
+  description: Our Creative Portfolio in R
+  email: arvind.venkatadri@manipal.educheck_net
+  navlinks:
+    - home: yes
+      name: Home
+      url: portfolio/
+    - name: About
+      url: about/
+    # - name: Get in touch
+    #   url: contact/
+  sidebarAbout:
+    - We are the Class of the R Language Workshop Feb 2022 at SMI, MAHE, Bangalore
+    - 17 Budding Artists, Designers, and Coders.
+  social:
+    email: email@example.com
+    #facebook: full page or profile url in facebook
+    github: full profile url in github
+    #gitlab: full profile url in gitlab
+    #googleplus: full profile url in googleplus
+    #instagram: full profile url in instagram
+    #linkedin: full profile url in linkedin
+    #stackoverflow: full profile url in stackoverflow
+    #twitter: full profile url in twitter
+    #whatsapp: wa.me service link
+    #youtube: full profile url in youtube
+  style: default
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]

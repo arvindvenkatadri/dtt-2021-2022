@@ -1,0 +1,69 @@
+from,to,weight,type,name1,name2
+2,1,7,love,hughie,robin
+2,3,7,love,hughie,annie/starlight
+2,4,6,friend,hughie,billy butcher
+2,5,5,friend,hughie,mothers milk
+2,6,5,friend,hughie,frenchie
+2,7,3,friend,hughie,kimiko
+2,8,1,enemy,hughie,homelander
+2,9,1,enemy,hughie,the deep
+2,10,1,kill,hughie,translucent
+2,11,1,enemy,hughie,queen maeve
+2,12,1,enemy,hughie,black noir
+2,13,1,enemy,hughie,a-train
+4,5,6,friend,billy butcher,mothers milk
+4,6,6,friend,billy butcher,frenchie
+4,7,4,friend,billy butcher,kimiko
+4,8,1,enemy,billy butcher,homelander
+4,9,1,enemy,billy butcher,the deep
+4,10,1,kill,billy butcher,translucent
+4,11,1,enemy,billy butcher,queen maeve
+4,12,1,enemy,billy butcher,black noir
+4,13,1,enemy,billy butcher,a-train
+3,4,6,friend,annie/starlight,billy butcher
+3,5,5,friend,annie/starlight,mothers milk
+3,6,5,friend,annie/starlight,frenchie
+3,7,4,friend,annie/starlight,kimiko
+3,8,1,enemy,annie/starlight,homelander
+3,9,1,enemy,annie/starlight,the deep
+3,10,1,enemy,annie/starlight,translucent
+3,11,3,friend,annie/starlight,queen maeve
+3,12,1,enemy,annie/starlight,black noir
+3,13,1,enemy,annie/starlight,a-train
+5,6,6,friend,mothers milk,frenchie
+5,7,3,friend,mothers milk,kimiko
+5,8,1,enemy,mothers milk,homelander
+5,9,1,enemy,mothers milk,the deep
+5,10,1,enemy,mothers milk,translucent
+5,11,1,enemy,mothers milk,queen maeve
+5,12,1,enemy,mothers milk,black noir
+5,13,1,enemy,mothers milk,a-train
+6,7,7,love,frenchie,kimiko
+6,8,1,enemy,frenchie,homelander
+6,9,1,enemy,frenchie,the deep
+6,10,1,enemy,frenchie,translucent
+6,11,1,enemy,frenchie,queen maeve
+6,12,1,enemy,frenchie,black noir
+6,13,1,enemy,frenchie,a-train
+7,8,1,enemy,kimiko,homelander
+7,9,1,enemy,kimiko,the deep
+7,10,1,enemy,kimiko,translucent
+7,11,1,enemy,kimiko,queen maeve
+7,12,1,enemy,kimiko,black noir
+7,13,1,enemy,kimiko,a-train
+8,9,1,neutral,homelander,the deep
+8,10,1,neutral,homelander,translucent
+8,11,4,neutral,homelander,queen maeve
+8,13,1,neutral,homelander,a-train
+8,12,1,neutral,homelander,black noir
+13,9,1,neutral,a-train,the deep
+13,10,1,neutral,a-train,translucent
+13,11,1,neutral,a-train,queen maeve
+13,12,1,neutral,a-train,black noir
+10,9,1,neutral,transluscent,the deep
+10,11,1,neutral,transluscent,queen maeve
+10,12,1,neutral,transluscent,black noir
+11,12,1,neutral,queen maeve,black noir
+11,9,1,neutral,queen maeve,the deep
+12,9,1,neutral,black noir,the deep
+13,1,1,kill,a-train,robin

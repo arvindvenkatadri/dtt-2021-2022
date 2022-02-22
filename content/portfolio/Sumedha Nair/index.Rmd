@@ -1,0 +1,171 @@
+---
+title: "Sumedha"
+author: "Sumedha Nair"
+date: "21/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/4.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi! I'm Sumedha, and the following graphs are from my second workshop at Srishti - Digital thinking tools.  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(mosaicData)
+library(RColorBrewer)
+library(paletteer)
+library(wesanderson)
+# library(igraph)
+# library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+library(visNetwork)
+```
+
+## Introduction
+
+Hi! I'm Sumedha, and the following graphs are from my second workshop at Srishti - Digital thinking tools.  
+
+## Graph 1
+
+Brief introduction of your chosen data set Describe the interesting columns and what they mean
+
+
+The dataset chosen for this graph is called SaratogaHouses. It contains the data on houses in Saratoga County, New York City in the year 2006.
+
+
+```{r read-1}
+names(SaratogaHouses)
+glimpse(SaratogaHouses)
+```
+
+Describe briefly what graph you are going to plot
+
+The graph is mainly going to depict the impact of the fuel used on the price of the house. I'm plotting it across the pctCollege rate (percent of neighbourhood that graduated college) as that gives us a sense of the population of the houses in each neighbourhood. 
+
+```{r plot-1}
+ggplot(data= SaratogaHouses, aes(x= pctCollege, y=price,alpha = 0.3))+ geom_point(aes(color=age, fill=age)) + facet_wrap(~fuel) +
+    scale_colour_gradientn(
+      colors = wes_palette(name = "GrandBudapest1", 
+                           n = 4),
+      na.value = "grey") + labs( title = "Fuel impact on price of the house")
+```
+
+Brief concluding remarks. What does the graph show? What geometric aesthetics did you use, for example?
+
+Gas seems to be the most popular type of fuel used. That is probably also why it's the most expensive, especially in the neighbourhoods at 40 - 60% pctCollege range, as most of the houses are located there, it's more in demand, which drives the prices up. It's also observed that electric heating is completely out of the picture in the older houses, it's oil and gas that is more in use. 
+## Graph 2
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+This was part of one of our group assignments, we created our own datasets based on interactions from a Tv show. We picked Phineas and Ferb, a classic childhood favourtie. 
+
+```{r read-2}
+pf_nodes <- read_csv("Nodes_PF.csv")
+pf_edges <- read_csv("Edges_PF.csv")
+
+pf_nodes
+pf_edges
+```
+
+Describe briefly what graph you are going to plot
+
+The graph is an interactive network representing the connections between the characters in the show. You can deduce quite a bit from this, the main characters the story line revolves around, the characters that don't have a lot of screen time, yet play an important role in connecting different story lines together. The interactive part also shows how when you try to pick out one person, you find them hitched to everyone else in the network in some way.
+
+```{r}
+pf_nodes
+pf_edges
+
+
+pf_nodes_vis <- pf_nodes %>% 
+  rowid_to_column(var = "id") %>% 
+  rename("label" = name) %>% 
+  mutate(gender = case_when(gender == "F" ~ "Female",
+                         gender == "M" ~ "Male")) %>% 
+  rename("group" = gender)
+
+pf_nodes_vis
+
+
+pf_edges_vis <- pf_edges %>% 
+  select(from, to) %>% 
+  left_join(., pf_nodes_vis, 
+            by = c("from" = "label")) %>% 
+  left_join(., pf_nodes_vis, 
+            by = c("to" = "label")) %>%
+  select("from"= id.x, "to" = id.y)
+
+pf_edges_vis
+```
+
+```{r plot-2}
+pf_nodes_vis %>%
+
+  visNetwork(nodes = ., edges = pf_edges_vis) %>% 
+  visNodes(font = list(size = 40)) %>% 
+  
+  # Colour and icons for each of the gender-groups
+  visGroups(groupname = "Female", shape = "icon", 
+            icon = list(code = "f182", size = 75, color = "tomato"),
+            shadow = list(enabled = TRUE)) %>% 
+  
+  visGroups(groupname = "Male", shape = "icon", 
+            icon = list(code = "f183", size = 75, color = "dodgerblue"), 
+            shadow = list(enabled = TRUE)) %>% 
+  addFontAwesome() %>% 
+  
+  # Add Interaction Controls
+  visInteraction(navigationButtons = TRUE,
+                 hover = TRUE,
+                 selectConnectedEdges = TRUE,
+                 hoverConnectedEdges = TRUE,
+                 zoomView = TRUE)
+
+```
+
+## Graph 3
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+mpg contains the fuel economy data from 1999 to 2008 for 38 popular models of cars.
+
+```{r read-3}
+names(mpg) 
+head(mpg) 
+tail(mpg) 
+dim(mpg) 
+
+any(is.na(mpg) == TRUE)
+```
+
+Describe briefly what graph you are going to plot
+
+The graph depicts the engine displacemt for different manufacturers.
+
+```{r plot-3}
+ggplot(mpg) + 
+    geom_density(aes(x = displ, 
+                 color = manufacturer, 
+                 fill = manufacturer), 
+                 alpha = 0.3) + labs(title = "Engine displacement vs manufacturer")
+
+```
+
+## My Course Reflection
+
+This was the one course that I've done here so far where I learnt something completely new. The process and general approach to iterating with questions and graphs was different from the usual, that was really interesting. It also opened my mind to the vast possibilities that come with data science, and understanding the importance of not just having information, but also being able to synthesize and organize it in a way that we can benefit from it, and optimize how much we make use of it. I think it really showed me how little I know and how much there is for me to learn and understand, be it understanding the dataset and asking the right questions or even translating that intuition into code. Overall the classes were really engaging, especially being directly related to the course I've taken, I was really lucky to have been part of this workshop. It gave me some direction on the things I have to focus on to move forward.  

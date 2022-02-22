@@ -1,0 +1,23 @@
+from,to,weightage,relationship,num.
+Candace,Stacy,4,Friends,1
+Candace,Linda,7,Family,2
+Phineas,Isabella,11,Friends,3
+Phineas,Baljeet,5,Friends,4
+Baljeet,Isabella,2,Friends,5
+Baljeet,Ferb,1,Friends,6
+Baljeet,Buford,8,Friends,7
+Phineas,Ferb,6,Family,8
+Perry the Platypus,Major Monogram,2,Professional,9
+Major Monogram,Karl,2,Professional,10
+Candace,Jeremy,6,Couple,11
+Phineas,Buford,4,Friends,12
+Phineas,Gretchen,1,Friends,13
+Isabella,Ferb,1,Friends,14
+Isabella,Buford,1,Friends,15
+Isabella,Gretchen,1,Friends,16
+Perry the Platypus,Heinz Doofenshmirtz,7,Nemesis,17
+Phineas,Perry the Platypus,1,Family,18
+Ferb,Perry the Platypus,1,Family,19
+Phineas,Linda,1,Family,20
+Isabella,Irving Dubois,1,Friends,21
+Phineas,Irving Dubois,1,Friends,22

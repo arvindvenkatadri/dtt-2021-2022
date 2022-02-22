@@ -1,0 +1,85 @@
+from,to,weight,type
+Jake Peralta,Amy Santiago,5,Spouse
+Jake Peralta,Charles Boyle,5,Friend - Colleague
+Jake Peralta,Gina Linetti,5,Friend - Colleague
+Jake Peralta,Raymond Holt,4,Boss - Dad
+Jake Peralta,Michael Hitchcock,3,Colleague
+Jake Peralta,Norm Scully,3,Colleague
+Jake Peralta,Milepnos,1,Stranger
+Jake Peralta,Doug Judy,4,Criminal - Friend
+Jake Peralta,Vulture,1,Boss - Enemy
+Jake Peralta,Sharron Jeffords,2,Friend
+Jake Peralta,Kevin Cozner,3,Friend
+Jake Peralta,Bob Anderrson,1,Acquaintance
+Jake Peralta,Trudy Judy,3,Acquaintance
+Jake Peralta,Nikolaj Boyle,4,Friends Son
+Jake Peralta,Adrian Pimento,3,Friend
+Jake Peralta,Rosa Diaz,4,Friend
+Jake Peralta,Terry Jeffords,4,Boss - Friend
+Rosa Diaz,Terry Jeffords,3,Boss - Friend
+Rosa Diaz,Amy Santiago,3,Friend - Colleague
+Rosa Diaz,Charles Boyle,3,Friend - Colleague
+Rosa Diaz,Gina Linetti,3,Friend - Colleague
+Rosa Diaz,Raymond Holt,3,Boss - Friend
+Rosa Diaz,Michael Hitchcock,2,Colleague
+Rosa Diaz,Norm Scully,2,Colleague
+Rosa Diaz,Kevin Cozner,2,Friend
+Rosa Diaz,Bob Anderrson,1,Acquaintance
+Rosa Diaz,Adrian Pimento,5,Dating
+Rosa Diaz,Doug Judy,2,Acquaintance
+Terry Jeffords,Vulture,1,Boss - Enemy
+Terry Jeffords,Amy Santiago,4,Friend - Colleague
+Terry Jeffords,Charles Boyle,4,Friend - Colleague
+Terry Jeffords,Gina Linetti,4,Friend - Colleague
+Terry Jeffords,Raymond Holt,4,Boss - Friend
+Terry Jeffords,Michael Hitchcock,3,Friend - Colleague
+Terry Jeffords,Norm Scully,3,Friend - Colleague
+Terry Jeffords,Sharron Jeffords,5,Spouse
+Terry Jeffords,Bob Anderrson,1,Acquaintance
+Terry Jeffords,Adrian Pimento,3,Friend - Colleague
+Amy Santiago,Adrian Pimento,3,Friend - Colleague
+Amy Santiago,Vulture,1,Boss - Enemy
+Amy Santiago,Charles Boyle,4,Friend - Colleague
+Amy Santiago,Gina Linetti,4,Friend - Colleague
+Amy Santiago,Raymond Holt,5,Boss - Friend
+Amy Santiago,Michael Hitchcock,3,Friend - Colleague
+Amy Santiago,Norm Scully,3,Friend - Colleague
+Amy Santiago,Milepnos,1,Acquaintance
+Amy Santiago,Doug Judy,2,Acquaintance
+Amy Santiago,Kevin Cozner,3,Friend
+Amy Santiago,Bob Anderrson,1,Acquaintance
+Amy Santiago,Maura Figgis,1,Criminal
+Gina Linetti,Charles Boyle,4,Friend - Colleague
+Gina Linetti,Raymond Holt,4,Boss - Friend
+Gina Linetti,Michael Hitchcock,3,Colleague
+Gina Linetti,Norm Scully,2,Colleague
+Gina Linetti,Vulture,1,Boss - Enemy
+Gina Linetti,Sharron Jeffords,2,Acquaintance
+Gina Linetti,Kevin Cozner,3,Friend
+Gina Linetti,Adrian Pimento,2,Friend - Colleague
+Charles Boyle,Kevin Cozner,2,Friend
+Charles Boyle,Vulture,1,Boss - Enemy
+Charles Boyle,Raymond Holt,4,Boss - Friend
+Charles Boyle,Michael Hitchcock,3,Friend - Colleague
+Charles Boyle,Norm Scully,3,Friend - Colleague
+Charles Boyle,Bob Anderrson,1,Acquaintance
+Charles Boyle,Sharron Jeffords,2,Friend
+Charles Boyle,Nikolaj Boyle,5,Son
+Charles Boyle,Adrian Pimento,3,Friend - Colleague
+Charles Boyle,Maura Figgis,1,Criminal
+Charles Boyle,Steve Boyle,4,Cousin
+Raymond Holt,Michael Hitchcock,3,Boss - Friend
+Raymond Holt,Norm Scully,3,Boss - Friend
+Raymond Holt,Doug Judy,2,Criminal
+Raymond Holt,Vulture,1,Colleague
+Raymond Holt,Sharron Jeffords,2,Friend
+Raymond Holt,Kevin Cozner,5,Spouse
+Raymond Holt,Bob Anderrson,4,Friend - Colleague
+Raymond Holt,Adrian Pimento,3,Subordinate - Friend
+Michael Hitchcock,Norm Scully,5,Friend
+Michael Hitchcock,Adrian Pimento,1,Friend
+Michael Hitchcock,Vulture,1,Boss - Enemy
+Norm Scully,Adrian Pimento,1,Friend
+Norm Scully,Vulture,1,Boss - Enemy
+Doug Judy,Trudy Judy,5,Sibling
+Rosa Diaz,Vulture,1,Boss - Enemy

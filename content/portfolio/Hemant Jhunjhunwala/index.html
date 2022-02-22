@@ -1,0 +1,125 @@
+---
+title: "Hemant"
+author: "Hemant"
+date: "21/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/151.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi I am Hemant pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R.
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Hi I am Hemant pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R.</p>
+</div>
+<div id="graph-1-2" class="section level2">
+<h2>Graph 1 &amp; 2</h2>
+<div id="description" class="section level3">
+<h3>Description</h3>
+<p>I decided to work on creating a Breaking Bad dataset for this project. The show contains good amount of characters to play around with.
+The show belongs to a unique genre, where they deal with the narcotics industry in the Southern USA.</p>
+<p>It took us some time to decide the headings of the columns in the nodes and edges dataset because it is not every other show. Since death played a big role in the show, we tried including the kill count of each character and also their involvement in drugs.</p>
+<pre><code>##  [1] &quot;Walter White &quot;        &quot;Jesse Pinkman &quot;       &quot;Gus Fring &quot;          
+##  [4] &quot;Hank Schrader &quot;       &quot;Skyler White &quot;        &quot;Mike Ehrmantraut &quot;   
+##  [7] &quot;Saul Goodman &quot;        &quot;Junior &quot;              &quot;Gale Boetticher &quot;    
+## [10] &quot;Ted Beneke&quot;           &quot;Marie Schrader &quot;      &quot;Tuco Salamanca &quot;     
+## [13] &quot;Skinny Pete&quot;          &quot;Jane Margolis &quot;       &quot;Tyrus Kitt&quot;          
+## [16] &quot;Steven Gomez&quot;         &quot;Lydia Rodarte-Quayle&quot; &quot;Todd Alquist &quot;       
+## [19] &quot;Hector Salamanca &quot;</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `From`.</code></pre>
+<pre><code>## NULL</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `To`.</code></pre>
+<pre><code>## NULL</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `From`.</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: `To`.</code></pre>
+<pre><code>## NULL</code></pre>
+<pre><code>## # A tbl_graph: 19 nodes and 53 edges
+## #
+## # An undirected simple graph with 1 component
+## #
+## # Node Data: 19 x 7 (active)
+##   Character_Name Sex   Alive_or_Dead Jobs  `Murders_Death~` No_of_Episodes
+##   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;            &lt;dbl&gt;          &lt;dbl&gt;
+## 1 &quot;Walter White~ M     Dead          &quot;Che~              201             62
+## 2 &quot;Jesse Pinkma~ M     Alive         &quot;Une~                8             62
+## 3 &quot;Gus Fring &quot;   M     Dead          &quot;Bus~               27             24
+## 4 &quot;Hank Schrade~ M     Dead          &quot;Pol~                2             51
+## 5 &quot;Skyler White~ F     Alive         &quot;Cor~                0             61
+## 6 &quot;Mike Ehrmant~ M     Dead          &quot;Hit~                9             25
+## # ... with 13 more rows, and 1 more variable: Groups &lt;chr&gt;
+## #
+## # Edge Data: 53 x 5
+##    from    to `Relationship_Weightage ` `Relationship_Type ` ...5 
+##   &lt;int&gt; &lt;int&gt;                     &lt;dbl&gt; &lt;chr&gt;                &lt;lgl&gt;
+## 1     1     2                        10 Friends              NA   
+## 2     1     3                         5 Proffesional         NA   
+## 3     1     4                         8 Family               NA   
+## # ... with 50 more rows</code></pre>
+<p>A simple representation of the network of the Breaking Bad character. The nodes in the centre must represent the character of Jesse Pinkman and Walter White.</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-2-1.png" width="480" /></p>
+<pre><code>## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+## found in Windows font database
+
+## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+## found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="480" /></p>
+</div>
+</div>
+<div id="graph-3" class="section level2">
+<h2>Graph 3</h2>
+<div id="description-1" class="section level3">
+<h3>Description</h3>
+<p>Banned items dataset is a collection of items banned in US schools and consits of <em>schoolName</em>, <em>state</em>, <em>item</em>, <em>type</em> and <em>prohibited</em> column that specifies the gender.</p>
+<pre><code>## Rows: 15,144
+## Columns: 5
+## $ schoolName &lt;chr&gt; &quot;RUSK H S&quot;, &quot;RUSK H S&quot;, &quot;EAST HIGH&quot;, &quot;TOMAHAWK HIGH&quot;, &quot;TOMA~
+## $ state      &lt;chr&gt; &quot;TX&quot;, &quot;TX&quot;, &quot;UT&quot;, &quot;WI&quot;, &quot;WI&quot;, &quot;WI&quot;, &quot;WI&quot;, &quot;WI&quot;, &quot;OK&quot;, &quot;TX&quot;,~
+## $ item       &lt;chr&gt; &quot;pillows&quot;, &quot;stuffed animals&quot;, &quot;dangling belts&quot;, &quot;wallet cha~
+## $ type       &lt;chr&gt; &quot;accessories&quot;, &quot;accessories&quot;, &quot;accessories&quot;, &quot;accessories&quot;,~
+## $ prohibited &lt;chr&gt; &quot;none&quot;, &quot;none&quot;, &quot;none&quot;, &quot;none&quot;, &quot;none&quot;, &quot;none&quot;, &quot;none&quot;, &quot;no~</code></pre>
+<p>I want to plot a graph to compare two item type based on their frequency in the banned item list. The two items are <strong>pajamas</strong> and <strong>weapons</strong></p>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/plot-2-1.png" width="480" /></p>
+</div>
+</div>

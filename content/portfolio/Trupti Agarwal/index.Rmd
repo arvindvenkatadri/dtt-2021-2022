@@ -1,0 +1,145 @@
+---
+title: "Trupti Agarwal"
+author: "Trupti Agarwal"
+date: "30/07/2021"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/7.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi! I am Trupti Agarwal. I am a first year student studying Human Centred Design at Srishti Manipal Institute.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+# library(igraph)
+# library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+# library(igraphdata)
+# library(downloadthis)
+
+#Graph 3
+library(osmdata) 
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(rnaturalearthhires)
+library(prettymapr) 
+library(osmplotr) 
+library(tmap) 
+library(sf)
+```
+
+## Introduction
+Hi! I am Trupti Agarwal. I am a first year student studying Human Centred Design at Srishti Manipal Institute. Using R Programming language, I have plotted different kinds of graph on 3 different datasets. 
+
+## Graph 1
+
+This dataset shows the various types of items that are banned in different schools across the United States. 
+The schoolName coloumn are the kinds of schools in different states of the United States. The type column are the kinds of things and items are the types of items under type of things. Eg backpacks is type of an accessory. Prohibited is where types of items are banned accoridng to the gender. So if it banned for both, then it is none and if it is only banned for males, then the particular row says male. 
+
+```{r read-1, echo=FALSE}
+BannedItemsInUS <- read.csv(file = "banned_items.csv")
+glimpse(BannedItemsInUS)
+```
+
+The graph below shows the number of schools that have banned alcohol, drugs and tobacco in respective states across the United States. 
+Alcohol, Drugs and Tobacco are the items that fall into the type of Promotion in the column. 
+
+```{r plot-1, echo=FALSE}
+BannedItemsInUS %>% filter(item == "alcohol" | item == "tobacco" | item == "drugs") %>% count(item, state) %>% ggplot(data = .) + aes(x = reorder(state, n), y = n, fill = item, position = "stack") + geom_col() + theme(axis.text = element_text(size = 6))
+```
+According to the data, Texas has the highest number of schools that have banned all the three items and Alaska has the lowest number of schools banning the items. Montana and Nevada have allowed drugs since there is no green colour for them in the graph. 
+To show the data more clearly, i have colour coded the items and have placed them in an ascending order. 
+
+## Graph 2
+
+This dataset is on the TV show, F.R.I.E.N.D.S. The chosen dataset is based on season 1, episode 7-10. The node dataset contains the information of the characters that are present in the given episodes. It contains their names, gender, profession and their personality traits. 
+the edge dataset contains the cpnversation between two people and the number of times they have spoken is given in the Weight coloumn. Type is the kind of relationship the two people share between eachother. 
+Hence we are trying to plot a network between the characters and see the strength of the relationships between each other. 
+
+```{r read-2, echo=FALSE}
+friends_nodes <- read_delim("./Friends_nodes.csv" , delim = ",")
+friends_edges <- read_delim("./Friends_edges.csv" , delim = ",")
+friends_nodes
+friends_edges
+```
+
+```{r, echo=FALSE}
+fn <- tbl_graph(nodes = friends_nodes, 
+                edges = friends_edges, 
+                directed = FALSE)
+fn
+```
+
+In the grapg below, we have plotted the connections between all the characters in those episodes of the show. the lines are colour coded that are according to the type of relationship between each other. the thickness of the lines shows the number of times they have had a converstaion with each other. Hence, greater the thickness of lines, greater is the bond between them. 
+
+```{r plot-2, echo=FALSE}
+ggraph(fn, layout = "linear", circular = TRUE) + 
+  geom_edge_arc(aes(width = Weight , color = Type ), alpha = 0.8) + 
+  scale_edge_width(range = c(0.5, 3)) +
+  geom_node_point(size = 4,colour = "orange") + 
+  geom_node_text(aes(label = Name),repel = TRUE, size = 3,
+                 max.overlaps = 10) +
+  labs(edge_width = "Weight") +
+  theme_graph()+
+  theme(legend.position = "right", 
+        aspect.ratio = 1)
+```
+
+## Graph 3
+
+This dataset shows depicts the number of restaurants that are there in Banajara Hills, Hyderabad according to the cuisine in the respective restuarants. The data of bulidings, parks, roads and restaurants is gathered by the package, osmdata that gives the data according to the location using Longitudes and Latitudes. 
+
+```{r read-3, echo=FALSE}
+bbox_3 <- prettymapr::searchbbox("Banjara Hills, Hyderabad, India")
+```
+
+First, we extract the data from osmdata package and then save in the bbox. Then we write the data and save it in a file and then we read the data again. Then we read data of the restaurants according to the cuisines. Whatever are empty/ Not applicable are removed and then we plot the graph. 
+
+```{r plot-3, echo=FALSE}
+buildings <- st_read("./buildings.gpkg")
+roads <- st_read("./roads.gpkg")
+parks <- st_read("./parks.gpkg")
+restaurants <- st_read("./restaurants.gpkg")
+```
+```{r, echo=FALSE}
+restaurants %>% nrow()
+names(restaurants)
+restaurants$cuisine
+
+```
+```{r, echo=FALSE}
+restaurants <- restaurants %>% 
+  drop_na(cuisine) %>% # Knock off nondescript restaurants
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ";") %>% 
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ",")
+
+restaurants$cuisine
+```
+```{r, echo=FALSE}
+ggplot() + 
+  geom_sf(data = buildings, colour = "burlywood1") + 
+  geom_sf(data = roads, colour = "gray80") +
+  geom_sf(data = parks, colour = "dark green") +
+  geom_sf(data = restaurants %>% drop_na(cuisine), aes(fill = cuisine), colour = "black", shape = 21, size = 3) + 
+  theme(legend.position = "right") +
+  labs(title = "Restaurants in Banjara Hills, Hyderabad, India",
+       caption = "Based on osmdata")
+```
+
+## My Course Reflection
+
+Learning R programming language was a lot of fun and I have grown a lot in these 2 weeks of the workshop. My earlier experience with learning a programming language has not been pleasant and never thought I will be able to learn another language again. It had become intimidating for me to do coding again. But this workshop went so smoothly that I didn't feel stuck anywhere. I understood most of the things Arvind taught us and how one should approach a dataset and code using your intuition instead of memorizing the syntax. I have progressed a lot of and felt that the course was at the right pace. In my HCD journey, I look forward to continuing using R in my research methods, data collection and creating good user friendly products like apps and websites. 
+I learnt that data collection and analysis of the research is one of the most important things to do to improve human experience. 

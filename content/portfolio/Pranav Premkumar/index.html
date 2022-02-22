@@ -1,0 +1,154 @@
+---
+title: "Pranav Premkumar"
+author: "Pranav Premkumar"
+date: "20/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/101.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hey there! I'm Pranav Premkumar and I am someone who doesn't really like coding. 
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<blockquote>
+<p>Hey there! I’m Pranav Premkumar and I am someone who doesn’t really like coding. The Python language had really put me away from venturing into this space for a long time! That was until I was introduced to the R language in our workshop. In a span of 2 weeks, I tried my best to grasp as much of the language as I could. This site captures a few of my attempts on data visualisation with R that came about as a result of a lot of whining and troubleshooting. Nevertheless, I am quite proud of the results!</p>
+</blockquote>
+</div>
+<div id="graph-1---covid-and-its-impact-on-food-prices-in-india" class="section level2">
+<h2>Graph 1 - Covid and its impact on Food Prices in India</h2>
+<p>The dataset I used for this graph is based on Food Prices in India across regions over a span of almost 3 decades. There are 133,137 rows &amp; 13 columns in this dataset.</p>
+<p>The variables are:</p>
+<p><strong>Qualitative:</strong></p>
+<ul>
+<li>“date” <date> -&gt; The date in yyyy-mm-dd format<br />
+</li>
+<li>“admin1” <chr> -&gt; State in India</li>
+<li>“admin2” <chr> -&gt; District</li>
+<li>“market” <chr> -&gt; City/Town<br />
+</li>
+<li>“latitude” <dbl> -&gt; Latitude of City/Town</li>
+<li>“longitude” <dbl> -&gt; Longitude of City/Town</li>
+<li>“category” <chr> -&gt; Type of Commodity</li>
+<li>“commodity” <chr> -&gt; Commodity</li>
+<li>“unit” <chr> -&gt; Unit of mass of Commodity</li>
+<li>“pricetype” <chr> -&gt; Price Type</li>
+<li>“currency” <chr> -&gt; Currency Type - INR</li>
+</ul>
+<p><strong>Quantitative:</strong></p>
+<ul>
+<li>“price” <dbl> -&gt; Price in INR</li>
+<li>“usdprice” <dbl> -&gt; Price in USD</li>
+</ul>
+<p><strong>Link to the dataset:</strong> <a href="https://data.world/wfp/dc663585-4b6f-46ae-a6d6-b2f3e4ea32b5" class="uri">https://data.world/wfp/dc663585-4b6f-46ae-a6d6-b2f3e4ea32b5</a></p>
+<pre class="r"><code>India_FP &lt;- read_csv(&quot;india-food-prices-1.csv&quot;)</code></pre>
+<pre><code>## Rows: 133138 Columns: 13
+## -- Column specification --------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (13): date, admin1, admin2, market, latitude, longitude, category, commo...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>India_FP &lt;- India_FP[-1, ]
+India_FP &lt;- India_FP %&gt;% mutate(date= lubridate::as_date(date)) %&gt;% 
+  mutate(price = as.numeric(price),
+         usdprice = as.numeric(usdprice),
+         latitude = as.numeric(latitude),
+         longitude = as.numeric(longitude))
+
+glimpse(India_FP)</code></pre>
+<pre><code>## Rows: 133,137
+## Columns: 13
+## $ date      &lt;date&gt; 1994-01-15, 1994-01-15, 1994-01-15, 1994-01-15, 1994-01-15,~
+## $ admin1    &lt;chr&gt; &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Gujarat&quot;, &quot;Gujarat&quot;, &quot;G~
+## $ admin2    &lt;chr&gt; &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Ahmadabad&quot;, &quot;Ahmadabad&quot;~
+## $ market    &lt;chr&gt; &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Delhi&quot;, &quot;Ahmedabad&quot;, &quot;Ahmedabad&quot;~
+## $ latitude  &lt;dbl&gt; 28.66667, 28.66667, 28.66667, 28.66667, 23.03333, 23.03333, ~
+## $ longitude &lt;dbl&gt; 77.21667, 77.21667, 77.21667, 77.21667, 72.61667, 72.61667, ~
+## $ category  &lt;chr&gt; &quot;cereals and tubers&quot;, &quot;cereals and tubers&quot;, &quot;miscellaneous f~
+## $ commodity &lt;chr&gt; &quot;Rice&quot;, &quot;Wheat&quot;, &quot;Sugar&quot;, &quot;Oil (mustard)&quot;, &quot;Rice&quot;, &quot;Wheat&quot;, ~
+## $ unit      &lt;chr&gt; &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, &quot;KG&quot;, ~
+## $ pricetype &lt;chr&gt; &quot;actual&quot;, &quot;actual&quot;, &quot;actual&quot;, &quot;actual&quot;, &quot;actual&quot;, &quot;actual&quot;, ~
+## $ currency  &lt;chr&gt; &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR&quot;, &quot;INR~
+## $ price     &lt;dbl&gt; 8.00, 5.00, 13.50, 31.00, 6.80, 6.20, 13.50, 30.00, 9.00, 13~
+## $ usdprice  &lt;dbl&gt; 0.25, 0.16, 0.43, 0.99, 0.22, 0.20, 0.43, 0.95, 0.29, 0.44, ~</code></pre>
+<pre class="r"><code>India_FP %&gt;% filter(unit != &quot;100 KG&quot;, date &gt;= &quot;2018-12-15&quot;) %&gt;% group_by(date, commodity) %&gt;%
+  summarise(mean_price = mean(price, na.rm = TRUE)) %&gt;% 
+  ggplot(data=., aes(x= date, y= mean_price, colour= commodity)) + geom_point()+ geom_vline(xintercept = as.numeric(lubridate::ymd(&quot;2020-01-27&quot;)), colour = &quot;blue&quot;)+ labs(title = &quot;Covid Food Prices Surge&quot;) </code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;date&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/Covid%20Price%20Surge-1.png" width="480" />
+Through this scatter plot, I could detect an overall price surge across commodities during Covid. However, the price of essential supplies, such as rice and wheat have risen by only a minute extent.</p>
+<p>The blue line after 2020 is a marker of the first Covid case detected in India.</p>
+</div>
+<div id="graph-2---onion-vs-tomato-prices-over-a-decade-in-bengaluru" class="section level2">
+<h2>Graph 2 - Onion vs Tomato prices over a decade in Bengaluru</h2>
+<p>I used the same dataset as before to plot this graph.</p>
+<pre class="r"><code>#filtering by commodity and city
+India_FP %&gt;% mutate(month = format(date, &quot;%m&quot;), year = format(date, &quot;%Y&quot;)) %&gt;%
+select(month, year, commodity, market, unit, price) %&gt;% 
+  filter(commodity == &quot;Onions&quot; | commodity == &quot;Tomatoes&quot;, unit == &quot;KG&quot;, market == &quot;Bengaluru&quot;) %&gt;% 
+  ggplot(data=., aes(x= month, y = price, color = commodity, fill = commodity))+geom_point()+ labs(title = &quot;The battle of the Indian staples&quot;, subtitle = &quot;Onion vs Tomato Prices in Bengaluru by month&quot;)+ theme_fivethirtyeight()</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/read-2-1.png" width="480" />
+This graph is a price comparison between Onions and Tomatoes. I have overlapped the prices of these 2 commodities across a decade for each month. An interesting observation is that the price of Tomatoes is higher from May to August whereas during other months, the price of Onions is higher.</p>
+</div>
+<div id="graph-3-map-1---mapping-the-migration-of-a-white-stork." class="section level2">
+<h2>~Graph 3~ Map 1 - Mapping the migration of a white stork.</h2>
+<p>To create this map, I used a 2 datasets called “points” and “lines” which essentially capture the coordinates of the various places the white stork has been to!</p>
+<pre class="r"><code>animal_points &lt;- st_read(&quot;./Data2/points.shp&quot;)</code></pre>
+<pre><code>## Reading layer `points&#39; from data source 
+##   `C:\Users\Arvind\My Drive\R work\MyWebsites\dtt-2021-2022\content\portfolio\Pranav Premkumar\Data2\points.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 119392 features and 34 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 15.99268 ymin: -23.95106 xmax: 42.58018 ymax: 41.5113
+## Geodetic CRS:  WGS 84</code></pre>
+<pre class="r"><code>animal_lines &lt;- st_read(&quot;./Data2/lines.shp&quot;)</code></pre>
+<pre><code>## Reading layer `lines&#39; from data source 
+##   `C:\Users\Arvind\My Drive\R work\MyWebsites\dtt-2021-2022\content\portfolio\Pranav Premkumar\Data2\lines.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 20 features and 1 field (with 10 geometries empty)
+## Geometry type: LINESTRING
+## Dimension:     XY
+## Bounding box:  xmin: 15.99268 ymin: -23.95106 xmax: 42.58018 ymax: 41.5113
+## Geodetic CRS:  WGS 84</code></pre>
+<p>Describe briefly what graph you are going to plot</p>
+<pre class="r"><code>data(&quot;World&quot;)
+migration_countries &lt;-  World %&gt;% filter(name %in% c(&quot;Greece&quot;, &quot;Turkey&quot;, &quot;Syria&quot;, &quot;Israel&quot;, &quot;Lebanon&quot;, &quot;Palestine&quot;, &quot;Egypt&quot;, &quot;Jordan&quot;, &quot;Sudan&quot;, &quot;Chad&quot;, &quot;Saudi Arabia&quot;, &quot;S. Sudan&quot;, &quot;Ethiopia&quot;, &quot;Kenya&quot;, &quot;Tanzania&quot;, &quot;Uganda&quot;, &quot;Zimbabwe&quot;, &quot;Botswana&quot;, &quot;South Africa&quot;, &quot;Zambia&quot;, &quot;Malawi&quot;, &quot;Mozambique&quot;, &quot;Cyprus&quot;, &quot;Central African Rep.&quot;))</code></pre>
+<pre class="r"><code>tmap_style(style = &quot;natural&quot;)+
+
+tm_shape(migration_countries) +
+  tm_polygons(col = &quot;gray30&quot;) +
+
+tm_shape(animal_lines) +
+  tm_lines(col = &quot;green2&quot;) +
+
+ 
+tm_shape(animal_points) +
+  tm_dots(col = &quot;hotpink&quot;, size = 0.01)</code></pre>
+<pre><code>## tmap style set to &quot;natural&quot;</code></pre>
+<pre><code>## other available styles are: &quot;white&quot;, &quot;gray&quot;, &quot;cobalt&quot;, &quot;col_blind&quot;, &quot;albatross&quot;, &quot;beaver&quot;, &quot;bw&quot;, &quot;classic&quot;, &quot;watercolor&quot;</code></pre>
+<pre><code>## Warning: The shape animal_lines contains empty units.</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/using%20tmap-1.png" width="480" />
+The stork’s journey took it from the Evros Delta, in north eastern Greece to various locations across the Middle East and Africa, the farthest being in Limpopo, South Africa!</p>
+</div>
+<div id="my-course-reflection" class="section level2">
+<h2>My Course Reflection</h2>
+<p>As I had mentioned before, coding has always been something that has overwhelmed me. There were situations over the past 2 weeks where I just wanted to give up when something didn’t work. But I guess the only way I get rid of this fear is by coding more often. I wish this workshop spanned more than just 2 weeks, since the extra time span would have given me the opportunity to work at my pace, to do a series of trials and errors until I’ve actually figured how the code really works.</p>
+<p>I do see how this language is beneficial in the area of data visualisation, in helping us “see the unseen”. I am however currently unable to anticipate how I could use this skill in my design practice. But, as it has always been with any sort of skill I have acquired, they come to use in the most unexpected situations I could ever think of!</p>
+<p>Also, I hope I didn’t tire Arvind with the barrage of questions I posed at him every class. Thank you for patiently answering all my questions! It definitely helped me stay afloat in the R ocean. I hope I don’t hear any aRRRs in the distance though 0_o</p>
+</div>

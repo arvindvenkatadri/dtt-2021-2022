@@ -1,0 +1,192 @@
+---
+title: "Annie Vaithara"
+author: "Annie Vaithara"
+date: "20/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/9.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hey, I am Annie. I am that person who will keep running the code over and over again until I get it right. I am majoring in Creative and Applied Computations, below are the works I enjoyed doing the most.  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+library(tidyverse)
+library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+library(visNetwork)
+#library(dplyr)
+library(RColorBrewer)
+library(mosaicData)
+library(osmdata)
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(rnaturalearthhires)
+library(prettymapr)
+library(tidyverse) 
+library(osmplotr)
+library(tmap) 
+library(sf)
+```
+
+## Introduction
+
+> Hey, I am Annie. I am that person who will keep running the code over and over again until I get it right. I am majoring in Creative and Applied Computations, below are the works I enjoyed doing the most.  
+> show here.
+
+## Graph 1
+
+This network graph is based on the 2021 movie Don't Look Up, starring Leonardo DiCaprio, Jennifer Lawerence, Meryl Streep and much more. The interactions between the main characters were logged and counted, it is based on that data that was built from ground up the graphs were made.
+
+```{r read-network-data,message=FALSE,warning=FALSE}
+dlu_nodes <- read_csv("dontlookup_nodes.csv")
+dlu_edges <- read_csv("dontlookup_edges.csv") 
+
+dlu_nodes
+dlu_edges
+
+
+dlu_nodes_vis <- dlu_nodes %>% 
+  rowid_to_column(var = "id") %>% 
+  rename("label" = Name) %>% 
+  mutate(Sex = case_when(Sex == "F" ~ "Female",
+                         Sex == "M" ~ "Male")) %>% 
+  replace_na(., list(Sex = "Transgender?")) %>% 
+  rename("group" = Sex)
+
+dlu_nodes_vis
+
+dlu_edges_vis <- dlu_edges %>% 
+  select(from, to) %>% 
+  left_join(., dlu_nodes_vis, 
+            by = c("from" = "label")) %>% 
+  left_join(., dlu_nodes_vis, 
+            by = c("to" = "label")) %>%
+  select("from"= id.x, "to" = id.y)
+
+dlu_edges_vis
+```
+
+
+This is an interactive network graph that shows the relations between all the characters in the movie. The graph shows the females in a red colour with the icon and male with the blue icon.
+
+```{r}
+dlu_nodes_vis %>%
+
+  visNetwork(nodes = ., edges = dlu_edges_vis) %>% 
+  visNodes(font = list(size = 15)) %>% 
+  
+  visGroups(groupname = "Female", shape = "icon", 
+            icon = list(code = "f182", size = 30, color = "red"),
+            shadow = list(enabled = TRUE)) %>% 
+  
+  visGroups(groupname = "Male", shape = "icon", 
+            icon = list(code = "f183", size = 30, color = "blue"), 
+            shadow = list(enabled = TRUE)) %>% 
+  
+  #visLegend() %>%
+  #Add the fontawesome icons!!
+  addFontAwesome() %>% 
+  
+  # Add Interaction Controls
+  visInteraction(navigationButtons = TRUE,
+                 hover = TRUE,
+                 selectConnectedEdges = TRUE,
+                 hoverConnectedEdges = TRUE,
+                 zoomView = TRUE)
+```
+
+The graph mechanism works with nodes (dots) and edges (lines) where the line shows the link between the characters and the nodes in itself are the characters. We had given each character an alphanumeric code to make the graph more readable.
+
+## Graph 2
+
+This graph is based on the data of houses in Saratoga. It was a dataset that was premade and I worked on it to answer some questions.
+
+```{r read-saratoga-houses}
+data("SaratogaHouses")
+names(SaratogaHouses)
+dim(SaratogaHouses)
+summary(SaratogaHouses)
+```
+
+This scatter plot graph answers the question "What is the change in price with the living area?" 
+
+```{r plot-2}
+SaratogaHouses %>% 
+  filter(rooms > 7) %>% 
+  ggplot(aes(x = log10(price),
+             y = livingArea))+
+  geom_point(aes(colour = rooms),
+             alpha = 0.7) +
+  facet_wrap(~fuel, ncol = 1) + 
+  scale_colour_distiller(palette = "Greens")
+```
+
+Plotting 1728 houses in Saratoga with dots was difficult and almost impossible to read. So, I filtered the data to include only houses with more than seven rooms to compare the change in price as the living are increases. The graph is colour-coded by the number of rooms and faceted by the kinds of fuels.
+
+## Graph 3
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+```{r read-3,message=FALSE,warning=FALSE}
+restaurants <- st_read("./restaurants.gpkg")
+buildings <- st_read("./buildings.gpkg")
+park <- st_read("./parks.gpkg")
+roads <- st_read("./roads.gpkg")
+
+restaurants %>% nrow()
+names(restaurants)
+restaurants$cuisine
+
+restaurants <- restaurants %>% 
+  drop_na(cuisine) %>%
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ";") %>% 
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ",")
+
+restaurants$cuisine
+```
+
+This graph plots all the reaturants in Deira, Dubai. 
+
+```{r plot-maps}
+ggplot() + 
+  geom_sf(data = buildings,
+          colour = "darkblue") + 
+  geom_sf(data = park,
+          colour = "green")+
+  geom_sf(data = roads,
+          colour = "grey") +
+  geom_sf(data = restaurants %>% drop_na(cuisine), 
+          aes(fill = cuisine), 
+          colour = "red", 
+          shape = 21, 
+          size = 3)+
+  theme(legend.position = "none")
+  labs(title = "Restaurants in Deira")
+```
+
+## My Course Reflection
+
+The course was filled with energy and intrigue, especially for me. I knew what to expect and how to work. The entire duration of the course did go on that way, but I did feel the load of the work and assignments. I did not want to complain about the workload for the fear of going slow and missing out on learning something. I learnt, graphs, maps, networks. The fun part throughout the course was watching the words we type transform into so much more. There was something truly magical about it, and the satisfaction of the job well done was immense. I don't know how much i will use this particular programming language compared to the others I know and am learning, but this is something that I will love to explore more and work with.
+
+As for our facilitator, I couldn't think of a better way to teach a programming language within two weeks. Arvind helped us through every step and made sure we all kept pace. Having learnt coding before, it has taken months for me to get the basics thoroughly, I was amazed how quick I was able to keep up the classes and not fall behind on concepts and understanding of how the code works.
+
+TL;DR - Arvind made a programming language easy and fun. It was genuinely amazing to learn maps, graphs, networks in a short amount of time.
+ 
+Excelsior!!!!

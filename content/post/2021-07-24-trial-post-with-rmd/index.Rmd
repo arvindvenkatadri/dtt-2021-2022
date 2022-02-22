@@ -1,0 +1,10 @@
+---
+title: Trial Post with Rmd
+author: arvindvenkatadri
+date: '2021-07-24'
+slug: []
+categories: []
+tags:
+  - tidygraph
+  - ggraph
+---

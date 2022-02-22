@@ -1,0 +1,208 @@
+---
+title: "Eshwar Venkatesan"
+author: "Eshwar Venkatesan"
+date: "21/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/141.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi!, I am Eshwar, I am pursuing Human Centered Design at Srishti, on this page you will be seeing the different kinds of data sets I have worked on during my workshop in Srishti.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(scales) # Create special ( % or $ ) scales
+library(RColorBrewer) # Colour Palettes
+library(wesanderson) 
+library(paletteer) # Colour Palettes
+library(colorspace) # Colour Palettes
+library(patchwork) # arranges plots on Row-Col 
+library(ggthemes)
+library(mosaicData)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(tmap)
+library(sf)
+library(visNetwork)
+library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+```
+
+## Introduction
+
+Hi!, I am Eshwar, I am pursuing Human Centered Design at Srishti, on this page you will be seeing the different kinds of data sets I have worked on during my workshop in Srishti, I learnt to use the language R for visualising data and make it more readable for anyone who wants to understand a scenario. There are a few graphs here that will give you some insights about the datasets I worked on.
+
+## Graph 1
+
+The first dataset is about the IPL auction that took place in 2013, here i had access to information such as the player name, their role, their speciality, the price at which they were sold and information about their performance such as the total wickets in their career and total runs.
+
+```{r read-1}
+IPLDATA <- read_csv("IPLDATA.csv")
+IPLDATA <- IPLDATA %>% drop_na()
+
+glimpse(IPLDATA)
+```
+
+The one thing i wanted to analyse was how the performance of the player impacts the sold price and I plotted a point graph to undertsand this by taking the batsmen that participated and plotting their performance on the X axis and their sold price on the Y axis.
+
+```{r}
+bowlers <- IPLDATA %>% 
+  filter(`Player role` == "Bowler")
+
+batters <- IPLDATA %>% 
+  filter(`Player role` == "Batsman")
+
+allrounders <- IPLDATA %>% 
+  filter(`Player role` == "Allrounder")
+
+wktkeeper <- IPLDATA %>% 
+  filter(`Player role` == "W. Keeper")
+```
+
+```{r plot-1}
+ggplot(bowlers) + 
+    geom_point(aes(x = `T-WKTS`, y = `SOLD PRICE`,
+                 color = -AGE)) 
+```
+
+The results of this plot were quite surprising to me as i was able to see that there are players who are really young in the game and really few performance indicators that have been sold for a very high price compared the players who have the best performance and most experience, but i realized that this could also be because of IPL being an emerging series and teams might have just wanted to take in potential good players and train them. The graded colors are used to indicate the experience of the players.
+
+## Graph 2
+
+For the next graph I chose a dataset that had the information about the listed houses in the Saratoga county of California, the data has information about the number of rooms in the houses, the type of air conditioning, price of the property, size of the property and other relevant information. I wanted to check how the price of properties range based on the number of rooms they have and the type of heating systems they have.
+
+```{r read-2}
+saratoga <- SaratogaHouses
+
+glimpse(saratoga)
+
+```
+
+The graph I used to plot this information is a point graph with the rooms on the X axis and the prices on the Y axis, the points are coloured on the basis of what kind of heating they have. houses with electric heating system seem to be going for a very low price here and alternatively we might also understand that electric heating system probably only works best for houses with less rooms and that might be why we dont see any high priced houses with electric heating.
+
+```{r plot-2}
+ggplot(saratoga) + 
+    geom_point(aes(x = `rooms`, y = `price`, color = heating),alpha = 0.3)+
+   ggtitle(label =
+            "Price Vs. Rooms")+
+scale_colour_brewer(palette = "Set1")
+```
+
+## Graph 4
+
+We learnt to plot maps using R in our workshop and I wanted to plot the migration tracks of the Galapagos Albatross, using packages such as tmap and data from movebank i plotted this information.
+
+```{r read-3}
+
+animalpoints <- st_read("./points.shp")
+animallines <- st_read("./lines.shp")
+```
+
+```{r}
+tmap_style("albatross")
+data("World") 
+mmigration_countries <-  World %>% filter(name %in% c("Ecuador", "Peru", "Colombia", "El Salvador", "Honduras", "Nicaragua", "Costa Rica", "Panama", "Guatemala")) 
+
+tm_shape(mmigration_countries) + tm_fill(col = "brown")  + tm_shape(animalpoints) + tm_dots(size = 0.1, col = "black") + tm_shape(animallines) + tm_lines(col = "white")
+
+```
+
+## Graph 5
+
+We made networks to analyse the connections between various people involved in an environment and we tried to plot the network of connections between the characters of the show Brooklyn 99, with the help of my team mate Siddanth, I created a dataset about the characters and the interactions they have, we plotted this information and displayed the most connected person in the show.
+
+
+```{r readb99}
+b99_nodes <- read_delim("./b99_Nodes.csv", delim = ",")
+b99_edges <- read_delim("./b99_Edges.csv", delim = ",")
+```
+
+```{r}
+
+b99_visualnodes <- b99_nodes %>% 
+  rowid_to_column(var = "id") %>% 
+  rename("label" = name) %>% 
+  mutate(sex = case_when(sex == "F" ~ "Female",sex == "M" ~ "Male")) %>% 
+  rename("group" = sex)
+
+
+b99_visualedges <- b99_edges %>% 
+  select(from, to) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("from" = "label")) %>% 
+  left_join(., b99_visualnodes, 
+            by = c("to" = "label")) %>%
+  select("from"= id.x, "to" = id.y)
+
+```
+
+
+
+```{r usingionicons}
+
+  visNetwork(nodes = b99_visualnodes, edges = b99_visualedges,) %>%
+  visLayout(randomSeed = 12345) %>%
+  visNodes(font = list(size = 20)) %>%
+  visEdges(b99_visualedges) %>%
+  visGroups(
+    groupname = "Female",
+    shape = "icon",
+    icon = list(
+      face = 'Ionicons',
+      code = "f25d",
+      color = "lightpink",
+      size = 125
+    )
+  ) %>%
+  
+  visGroups(
+    groupname = "Male",
+    shape = "icon",
+    icon = list(
+      face = 'Ionicons',
+      code = "f202",
+      color = "lightblue",
+      size = 125
+    )
+  ) %>%
+  
+  visLegend() %>%
+  addIonicons() %>%
+  visInteraction(
+    navigationButtons = TRUE,
+    hover = TRUE,
+    selectConnectedEdges = TRUE,
+    hoverConnectedEdges = TRUE,
+    zoomView = TRUE
+  )
+```
+
+
+## My Course Reflection
+
+I was really excited for this course because this was the first Digital Thinking course i was alloted to and i was eagerly looking forward to what we would be learning, and when i got to know about the fact that we will be learning R, I was really excited and since then this class has been all about coding in R, plotting graohs, maps, networks and understanding the logic behind various algorithms, atleast on the surface, deep down we were always asked to look at numbers and understand their impact on the daily lives of people, animals, our environment and beyond. 
+
+I learnt to make sure I don't jump into conclusions about any scenario without doing my due diligence on it. I learnt to code in R surely a flex, understood the importance of bringing context into light when analysing any form of data. Learnt about many 80s references and proverbs that just make life better. Understanding the importance of data and how to handle sensitive data and represent it in a way that will spark conversation and yet not cause controversy. Understanding to develop personal connections with the work I did to gain a deeper understanding of any concept. 
+
+As an aspiring Human Centered Designer, I have been told that it is very important to understand our users and research them before designing for them, this means we probably will have to deal with a lots and lots of data that might get very hard to read as a bunch of specs on a spreadsheet and i am pretty sure with the powerful and robust setup of R I will be able to develop visuals and outcomes that will help me or my organisation to make informed decisions about the work we need to do. I also think the contextual learnings i received from this course will benefit me hugely throughout my life.
+
+"Arvind is a horrible teacher and simply does not get what we need. Boomers shouldnt be allowed to teach any more in Srishti." is what Arvind thinks we want to say but if other boomers are even 1/10th of what Arvind is then we clearly dont have enough boomers in Srishti, I would like to thank Arvind and the entire class for such a great experience i really had a lots of fun and many R puns for sure.
+
+Thank You!!
+
+Jai Hind.

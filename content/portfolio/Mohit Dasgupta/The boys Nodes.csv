@@ -1,0 +1,14 @@
+id,gender,relation,species,life,race,group,kill count,name
+1,female,taken,human,dead,biracial,NA,0,robin
+2,male,single,human,alive,white,the boys,2,hughie
+3,female,taken,supe,alive,white,the seven,1,annie/starlight
+4,male,taken,human,alive,white,the boys,7,billy butcher
+5,male,taken,human,alive,black,the boys,0,mothers milk
+6,male,single,human,alive,white,the boys,0,frenchie
+7,male,single,supe,alive,asian,the boys,8,kimiko
+8,male,single,supe,alive,white,the seven,159,homelander
+9,male,single,supe,alive,white,the seven,0,the deep
+10,male,single,supe,dead,white,the seven,0,translucent
+11,female,taken,supe,alive,white,the seven,2,queen maeve
+12,male,single,supe,alive,black,the seven,5,black noir
+13,male,taken,supe,alive,black,the seven,2,a-train

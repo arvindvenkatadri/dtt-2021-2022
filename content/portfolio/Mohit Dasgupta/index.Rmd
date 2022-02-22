@@ -1,0 +1,154 @@
+---
+title: "MOHIT DASGUPTA"
+author: "MOHIT DASGUPTA"
+date: "30/07/2021"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/5.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: I am Mohit Dasgupta. Here are some of my best works in Data Visualization in R, which I executed in the Digital Thinking Tools Workshop during Feb 2022. 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(ggthemes)
+library(osmdata) 
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(rnaturalearthhires)
+library(prettymapr)
+library(tidyverse)
+library(osmplotr) 
+library(tmap) 
+library(sf)
+#library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+```
+
+## Introduction
+
+I am Mohit Dasgupta. Here are some of my best works in Data Visualization in R, which I executed in the Digital Thinking Tools Workshop during Feb 2022. 
+
+## Graph 1
+
+Brief introduction of your chosen data set Describe the interesting columns and what they mean
+
+This Dataset is about the IPL auction that happened in the year 2013, It shows the sold price and the base price of different players and which teams they went to.
+
+```{r read-1}
+my_data_1 <- read_csv("IPLDATA.csv")
+glimpse(my_data_1)
+```
+
+Describe briefly what graph you are going to plot
+
+It is a graph about the different playing roles of players in the IPL auction of 2013 and what was their sold price.
+
+```{r plot-1}
+ggplot(my_data_1) + 
+    geom_violin(aes(x = `PLAYING ROLE`, y = `SOLD PRICE`))
+
+```
+
+Brief concluding remarks. What does the graph show? What geometric aesthetics did you use, for example?
+
+The graph shows the different amount of playing roles and which one has the most players in a particular price bracket and which role has the longest range. I used the violin graph which utilizes area and length to depict values that a bar graph cannot.
+## Graph 2
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+```{r}
+buildings <- st_read("./buildings.gpkg")
+parks <- st_read("./parks.gpkg")
+greenery <- st_read("./greenery.gpkg")
+trees <- st_read("./trees.gpkg")
+roads <- st_read("./roads.gpkg")
+restaurants <- st_read("./restaurants.gpkg")
+```
+
+
+Describe briefly what graph you are going to plot
+
+The graph that I am going to plot shows the number of restaurants and the different kinds of cuisines they have to offer.
+
+```{r plot-2}
+ggplot() + 
+  geom_sf(data = buildings, colour = "burlywood1") + 
+  geom_sf(data = roads, colour = "gray80") +
+  geom_sf(data = restaurants %>% drop_na(cuisine), aes(fill = cuisine), colour = "black", shape = 21, size = 3) + 
+  theme(legend.position = "right") +
+  labs(title = "Restaurants in Connaught place",
+       caption = "Based on osmdata")
+```
+
+
+
+## Graph 3
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+
+We made a data set based upon the t.v. series "The Boys" and we wanted to show how the relationship of the characted had evolved or even were something that was should not have been the same way but circumstances played a beautiful role in shaping the story
+```{r read-3}
+the_boys_nodes <- read_delim("./The boys Nodes.csv", delim = ",")
+the_boys_edges <- read_delim("./FINAL Edges THE BOYS.csv", delim = ",")
+the_boys_nodes
+the_boys_nodes
+
+glimpse(the_boys_nodes)
+glimpse(the_boys_edges)
+```
+```{r 2.Create-the boys-graph-object}
+tb <- tbl_graph(nodes = the_boys_nodes,
+                edges = the_boys_edges, 
+                directed = FALSE)
+tb
+
+```
+
+
+
+Describe briefly what graph you are going to plot
+
+This graph will show the bonds between each character and the weightage of it with the thickness.
+
+
+```{r plot-3}
+ggraph(tb, layout = "linear", circular = TRUE) + 
+  geom_edge_arc(aes(width = weight), alpha = 0.8) + 
+  scale_edge_width(range = c(0.2, 2)) +
+  geom_node_point(size = 4,colour = "red") + 
+  geom_node_text(aes(label = name),repel = TRUE, size = 3,
+                 max.overlaps = 10) +
+  labs(edge_width = "Weight") +
+  theme_graph()+
+  theme(legend.position = "right", 
+        aspect.ratio = 1)
+
+
+```
+
+## My Course Reflection
+
+
+
+-During this course  I learnt was about asking questions, trying to decipher symbols and the most odd thing is that I actually used google more than I usually do, I started to search for answers more and not just relying on one person but gathering pieces and welding them together. This course boosted me high enough to give me the reassurance that I can learn different coding languages by myself if I put in the effort.
+
+I definitely learnt R but the qualities that were instilled in me during the process are things that I will probably use more during my professional and personal life. Lastly, more boomers like Arvind should be allowed to teach in Srishti to give rise to future boomers.

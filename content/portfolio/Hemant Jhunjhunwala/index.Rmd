@@ -1,0 +1,110 @@
+---
+title: "Hemant"
+author: "Hemant"
+date: "21/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/151.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi I am Hemant pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+
+```
+
+
+
+## Introduction
+
+Hi I am Hemant pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R.
+
+## Graph 1 & 2
+### Description
+I decided to work on creating a Breaking Bad dataset for this project. The show contains good amount of characters to play around with.
+The show belongs to a unique genre, where they deal with the narcotics industry in the Southern USA. 
+
+It took us some time to decide the headings of the columns in the nodes and edges dataset because it is not every other show. Since death played a big role in the show, we tried including the kill count of each character and also their involvement in drugs.
+
+
+```{r}
+nodes <-  read_delim("./Breaking Bad Character dataset.csv", delim = ",")
+edges <-  read_delim("./Breaking Bad Relations.csv", delim = ",")
+
+unique(nodes$Character_Name)
+unique(edges$From)
+unique(edges$To)
+cbind(unique(edges$From), unique(edges$To)) %>% unique()
+
+bb_graph<- tbl_graph(nodes = nodes,
+                               edges = edges,
+                               directed = FALSE)
+bb_graph
+```
+
+
+A simple representation of the network of the Breaking Bad character. The nodes in the centre must represent the character of Jesse Pinkman and Walter White.
+
+```{r}
+
+ggraph(graph = bb_graph, layout = "fr") +
+  geom_edge_link0(width = 1, color = "red") +
+  geom_node_point(shape = 18, size = 5, fill = "yellow", color = "blue", stroke = 2) +
+  geom_node_text(aes(label = Character_Name),repel = TRUE, size = 3,
+                 max.overlaps = 10) +
+  
+  labs(title = "Breaking Bad Character Relationships")
+```
+
+```{r}
+set_graph_style()
+
+bb_graph %>% 
+  activate(nodes) %>% 
+  
+  
+mutate(degree = centrality_degree()) %>% 
+ activate(edges) %>% 
+ mutate(betweenness = centrality_edge_betweenness()) %>%
+ggraph(layout = "kk") +
+geom_edge_link(aes(alpha = betweenness)) +
+geom_node_point(aes(size = degree, colour = degree)) +  scale_color_gradient(guide = "legend")
+```
+
+## Graph 3
+### Description
+Banned items dataset is a collection of items banned in US schools and consits of *schoolName*, *state*, *item*, *type* and *prohibited* column that specifies the gender.
+
+```{r read-2}
+my_data_2 <- read_csv("banned_items.csv")
+glimpse(my_data_2)
+```
+
+I want to plot a graph to compare two item type based on their frequency in the banned item list. The two items are **pajamas** and **weapons**
+
+```{r plot-2}
+my_data_2 %>% group_by(state,item) %>% 
+                filter(item=="weapons" | item=="pajamas") %>% count() %>% 
+  ggplot(data = ., aes(fill=item))+ geom_col(aes(x=state, y=n))+ coord_flip()
+
+``` 
+
+

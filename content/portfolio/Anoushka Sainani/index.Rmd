@@ -1,0 +1,184 @@
+---
+title: "Anoushka Sainani "
+author: "Anoushka Sainani"
+date: "20/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/201.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: I am Anoushka Sainani and this is my online portfolio of the work I did over the course of the past two weeks on R Studio.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+#map
+library(osmdata)
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(rnaturalearthhires)
+library(prettymapr)
+library(tidyverse) 
+library(osmplotr)
+library(tmap) 
+library(sf)
+
+#graph
+library(readr)
+#library(downloadthis)
+
+#network
+library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+```
+
+## Introduction
+
+> I am Anoushka Sainani and this is my online portfolio of the work I did over the course of the past two weeks on R Studio. The graphs below show my progress and what I have learnt in this workshop with Arvind.  
+  
+> I chose the graphs that I enjoyed making the most.
+
+## Graph 1 - Colaba Restaurants
+
+This is a map of the restaurants in Colaba, Bombay, plotted using tmaps on R Studio. The data has been taken from various packages like 'rnaturalearth', 'osmdata', 'sf', etc. 
+
+```{r bbox2, echo=FALSE}
+
+bbox_2 <- osmdata::getbb("Colaba, Bombay, India")
+bbox_2
+
+```
+
+
+```{r, echo=FALSE}
+
+buildings <- st_read("buildings.gpkg")
+parks <- st_read("parks.gpkg")
+greenery <- st_read("greenery.gpkg")
+trees <- st_read("trees.gpkg")
+roads <- st_read("roads.gpkg")
+restaurants <- st_read("restaurants.gpkg")
+```
+
+```{r drop na cuisine, echo=FALSE,warning=FALSE}
+restaurants <- restaurants %>% 
+  drop_na(cuisine) %>% 
+  
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ";") %>% 
+  separate(col = cuisine, into = c("cuisine", NA, NA), sep = ",")
+
+restaurants$cuisine
+```
+
+**With this interactive map, I am plotting the restaurants in Colaba, Bombay.**  
+
+
+```{r using tmap}
+
+   tmap_mode("view")
+
+tm_shape(buildings) +
+  tm_fill(col = "mediumblue") +
+
+tm_shape(roads) +
+  tm_lines(col = "gold") +
+
+tm_shape(greenery) +
+  tm_polygons(col = "limegreen") +
+
+tm_shape(parks) +
+  tm_dots(col = "olivedrab3") +
+
+  tm_shape(restaurants)+
+  tm_dots(col = "cuisine" , size = 0.2)+
+  tm_layout(legend.outside = TRUE)
+
+```
+
+Each point marks a different restaurant, with the names being seen on scrolling over them and each colour code denotes a different cuisine.  
+In this map, the buildings and roads in the area can also be seen.  
+Polygons, lines and points have been used to show the buildings, roads and restaurants respectively.  
+  
+  
+## Graph 2 - Saratoga Houses Data
+
+The dataset selected by me for this graph is of the houses on sale in Saratoga County, New York in 2006. The dataset has many variables like age, livingArea, etc. that pose certain interesting questions about the type of families and the living situation in the area.  
+
+```{r,message=FALSE}
+saratoga_houses_dataset <- read_csv("saratoga houses dataset.csv")
+```
+  
+**With this graph, I want to find out if older houses have more number of rooms as compared to newer houses.**  
+To find out, I plotted a graph of living area against age of the houses with the colour of the dots being the price. 
+
+```{r livingArea and price, echo=FALSE}
+saratoga_houses_dataset %>% ggplot(data=., aes(x = livingArea, 
+                                  y = age, color = price, alpha = 0.3)) + geom_point()+geom_smooth(method="lm")
+```
+I found out that newer houses are comparitively smaller in size(sq.ft.) as the newer families are more nuclear hence requirement is for space is lesser.  
+This was an interesting conclusion that I was able to derive because of the graph.
+
+## Graph 3 - Brooklyn 99 Network
+
+I decided to network the relationship of the characters of Brooklyn 99. I made the dataset myself by selecting certain episodes, watching them and noting down the strengths and types of relationships between the characters. I wanted to find out who the most connected character was and how many kinds of relationships the characters could have had.
+
+```{r}
+
+b99_nodes <- read_delim("b99Nodes.csv", delim = ",")
+b99_nodes
+b99_edges <- read_delim("b99Edges.csv", delim = ",")
+b99_edges
+```
+
+```{r 2.Create-b99-graph-object}
+b99 <- tbl_graph(nodes = b99_nodes, 
+                edges = b99_edges, 
+                directed = FALSE)
+b99
+```
+
+**Network to find out what the most common type of relationship in the show is and what is the strength of each relationship**
+The width of the lines represent the strength of the relationships and the different colours represent the different types of relationships.
+```{r b99-arc-rel-strength}
+
+ggraph(b99, layout = "linear") +
+  geom_edge_arc(aes( width = weight, color = type_of_R), alpha = 0.8) +
+  scale_edge_width(range = c(0.2, 2)) +
+  geom_node_point(size = 3, colour = "black") +
+  labs(edge_width = "Weight") +
+   geom_node_label(aes(label = Code), 
+                  repel = TRUE, max.overlaps = 20,
+                 alpha = 0.6,
+                 size = 3)+
+  theme_graph()+
+  theme(legend.position = "top")
+```
+
+From the graph I found out that 1(Jake Peralta) is the most connected but at the same time, all the characters are connected to each other directly or indirectly. 
+There are many types of relationships out of which the highest is the number of friendships.
+
+
+
+## My Course Reflection
+  
+This course was about network and data science using R software to create the graphs, networks and maps. Being new to coding, it was difficult to get a hold on the workings of R, but with Arvind's constant guidance, the concepts got much clearer and I started to enjoy working with it.   
+  
+In the first week, we plotted graphs based on various datasets. I started thinking about the interesting questions that could be asked from the variables to get some interesting conclusions. The Saratoga Houses dataset, was one I enjoyed working with a lot as I started thinking differently about what the little information could tell about the people living there/buying houses there. I started thinking deeper and was able to find out a lot of fascinating information. In week 2, the making of maps and networks was a fun change and I enjoyed plotting restaurants and amenities in Bombay and seeing the look of surprise on people's faces when I told them that I coded that map. 
+  
+Having selected Human Centered Design as my major, data and network science is going to play a big role in my practice. Mapping out the human nature, our behavior and tendencies is essential for the design of products and services for us humans. Making graphs with R is a great way to analyse the problems and create solutions and is something that I will be using in my practice on a day to day basis. Along with that, I have started looking at data differently and more deeply and has made me more curious which will help me in asking the right questions to get the most information from data.
+
+Arvind's way of teaching made R much easier to understand. All my silliest of doubts were patiently answered by him multiple times till I grasped the concepts and his metaphors made the course extremely fun, making me want to learn more. He is the coolest boomer I know and is definitely cooler than all of us. His efforts to make the class interactive and open made all of us connect more too and made this class of 2 weeks feel much longer(in a good way). I would've loved for the course to have been for 4 or 5 weeks but nevertheless, I'm glad I got to be a part of Arvind's class. This was the best class I've had and I will definitely stay in touch with Arvind. Thanks for the greatest workshop!
+

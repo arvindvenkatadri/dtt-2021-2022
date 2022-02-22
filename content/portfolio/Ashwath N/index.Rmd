@@ -1,0 +1,109 @@
+---
+title: "Ashwath"
+author: "Ashwath"
+date: "20/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/181.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: Hi I am Ashwath pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R. These are some of the best works from this course.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+library(mosaicData)
+library(osmdata)
+library(rnaturalearth)
+library(rnaturalearthdata)
+#library(rnaturalearthhires)
+library(prettymapr) 
+library(osmplotr) 
+library(tmap) 
+library(sf)
+library(dplyr)
+library(igraph)
+#library(netrankr)
+library(tidygraph)
+library(ggraph)
+library(graphlayouts)
+#library(igraphdata)
+```
+
+## Introduction
+
+Hi I am Ashwath pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R
+
+## Graph 1
+### Description
+Family - The ID of the family.
+Father - The height of the father(inches).
+Mother - The height of the mother(inches).
+Sex - The gender of the child.
+Height - The height of the child.
+nkids - The number of adult children in the family.
+
+
+```{r}
+names(Galton)
+glimpse(Galton)
+```
+
+
+I am going to plot on a question - Does the daughter's and son's height depend on mother's height? I am going to have my x value as 'mother' and y as 'height'.
+
+## Question - Does the doughter's and son's height depend on mother's height?
+
+```{r plot-1}
+Galton <- Galton %>% drop_na()
+ggplot(Galton, aes(x=mother, y=height, colour=sex)) + geom_point()
+```
+
+The graph shows us whether the children's height is dependent on their mothers. I used geom_point to plot my graph.
+
+
+## Graph 2 & 3
+### Description
+In this we were asked to take any data set of our favorite show/ movie/ novel. I chose my favorite show - Sherlock Holmes. In this we were asked to create our own data set and work using that.
+
+```{r}
+sh_nodes <- read_delim("./sh_nodes.csv", delim=";")
+sh_edges <- read_delim("./sh_edges.csv", delim=";")
+sh_nodes
+sh_edges
+```
+
+```{r}
+sh <- tbl_graph(nodes = sh_nodes,
+                edges = sh_edges,
+                directed = FALSE)
+```
+
+
+I wanted to facet the information according to the relationship they share with each other and the type of bond also that they share with each other.
+
+
+## faceting according to the type of bond they shared with eachother and the bonding they share between eachother
+
+```{r}
+set_graph_style()
+
+ggraph(sh, layout = "linear", circular = TRUE) + geom_edge_link(aes(color = Type)) + geom_node_point() + facet_edges(~Type)
+
+ggraph(sh, layout = "linear", circular = TRUE) + geom_edge_link(aes(color = Weight)) + geom_node_point() + facet_edges(~Weight)
+```
+
+
+I have used faceting. In this I chose to have one kind of layout, but with two different information. Their are two kind of graphs. 
+
+

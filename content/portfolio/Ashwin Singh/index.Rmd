@@ -1,0 +1,142 @@
+---
+title: "Ashwin Singh"
+author: "Ashwin Singh"
+date: "21/02/2022"
+slug: []
+categories:
+  - R
+tags:
+  - R Markdown
+image: https://www.alice-in-wonderland.net/wp-content/uploads/6.jpg
+caption: ''
+preview: yes
+output:
+  blogdown::html_page:
+    toc: no
+    fig_width: 5
+    fig_height: 5
+    keep_md: yes
+description: I'm Ashwin Singh and i love to read about socio political issues and develop concepts around them.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(tidyverse)
+
+
+#library(igraph)
+#library(netrankr)
+library(mosaicData)
+
+library(tidygraph)
+
+library(ggraph)
+library(graphlayouts)
+
+#library(igraphdata)
+library(visNetwork)
+
+```
+
+## Introduction
+
+> I'm Ashwin Singh and i love to read about socio political issues and develop concepts around them. I will try to answer questions like
+> How much is a fireplace worth in Saratoga Houses
+
+## Graph 1
+
+The dataset SaratogaHouses has 1728 observations and 16 variables. I'm interested in *fireplaces* variable and its value when *livingArea* and *lotSize* are constant
+
+```{r}
+#library(dplyr)
+SaratogaHouses
+#glimpse(SaratogaHouses)
+
+```
+
+The scattered plot with *livingArea* and *price* had one point in the far left that had high price but comparitively small living area. This generated a curiosity to check how much a fireplace is worth.
+
+```{r plot-1}
+SaratogaHouses %>% ggplot(data = .) + geom_point(aes(x=livingArea, y=price))
+
+```
+```{r}
+lm1= lm(price ~ livingArea+lotSize+fireplaces, data=SaratogaHouses)
+coef(lm1) 
+```
+
+
+Scattered point graph was used to see how living area impacts the price of the house and how other variables might affect the overall increase in price.
+
+## Graph 2
+
+Banned items dataset is a collection of items banned in US schools and consits of *schoolName*, *state*, *item*, *type* and *prohibited* column that specifies the gender.
+
+```{r read-2}
+my_data_2 <- read_csv("banned_items.csv")
+glimpse(my_data_2)
+```
+
+I want to plot a graph to compare two item type based on their frequency in the banned item list. The two items are **pajamas** and **weapons**
+
+```{r plot-2}
+my_data_2 %>% group_by(state,item) %>% 
+                filter(item=="weapons" | item=="pajamas") %>% count() %>% 
+  ggplot(data = ., aes(fill=item))+ geom_col(aes(x=state, y=n))+ coord_flip()
+
+```
+
+## Graph 3
+
+Brief introduction of your chosen data set Describe the interesting
+columns and what they mean
+
+```{r read-3}
+dontlookup_nodes <- read_csv("dontlookup_nodes.csv")
+# here nodes are the names of the characters in the office which are also given a certain Id
+
+dontlookup_edges <- read_csv("dontlookup_edges.csv") # here the edges are the connections of these characters (nodes) with one another
+
+# the following is a weighted graph that shows the magnitude of the connection between the characters along with the ids 
+
+dontlookup_nodes
+dontlookup_edges
+```
+
+```{r 2.Create_graph_object}
+ga <- tbl_graph(nodes = dontlookup_nodes,
+                edges = dontlookup_edges, 
+                directed = FALSE)
+ga
+#
+
+## the following data contains the Id , names and more information
+##The following is a weighted graph that metaphorically connotes the magnitude of the connection between the characters 
+```
+
+The network of the characters showing the weight of the interactions they have had in the movie "Don't look up". Coord circular graph was used to depict equal importance of every caracter in a socio political issue like climate change which is depicted with a metaphor of comet heading towards Earth. Although evryone has a role to play, some characters who have more networks play a more crucial role.
+
+
+```{r plot-3}
+ggraph(ga, layout = "linear", circular = TRUE) + 
+  geom_edge_arc(aes(width = weight), alpha = 0.8) + 
+  scale_edge_width(range = c(0.2, 2)) +
+  geom_node_point(size = 4,colour = "red") + 
+  geom_node_text(aes(label = Name),repel = TRUE, size = 3,
+                 max.overlaps = 10) +
+  labs(edge_width = "Weight") +
+  theme_graph()+
+  theme(legend.position = "right", 
+        aspect.ratio = 1)
+
+```
+
+## My Course Reflection
+
+This course was about using data to get insights and revelations on a particular topic. 
+
+My major learning from this workshop was to ask imaginative questions before jumping on solving the problems.
+
+As designers we constantly come across the idea of *problem solving*. I feel after this course, I'm aware of the details and insights that data science can reveal. Data as a tool, if used in creative ways can work wonders for a designer.
+
+
