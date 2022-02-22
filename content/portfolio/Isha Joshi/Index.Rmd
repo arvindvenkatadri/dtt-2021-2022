@@ -11,10 +11,7 @@ image: https://www.alice-in-wonderland.net/wp-content/uploads/8.jpg
 caption: ''
 preview: yes
 output:
-  blogdown::html_page:
-    toc: no
-    fig_width: 7
-    fig_height: 5
+  blogdown::html_page
 description: This workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs.
 ---
 
@@ -98,12 +95,12 @@ ggraph(fn, layout = "linear", circular = FALSE) +
 **The data set includes the conversations and communications between the characters of the TV show 'Friends'.**
 
 ```{r read-3 , echo=FALSE}
-fn %>%activate(nodes) %>% 
+fn %>% activate(nodes) %>% 
   
-
-mutate(degree = centrality_degree(mode = c("in"))) %>% filter(degree > 0) %>% 
-  
-activate(edges) %>% mutate(betweenness = centrality_edge_betweenness())
+mutate(degree = centrality_degree(mode = c("in"))) %>% 
+  filter(degree > 0) %>% 
+  activate(edges) %>% 
+  mutate(betweenness = centrality_edge_betweenness())
 ```
 
 **The number of conversations each character has with another affects the intensity of the dots and the lines.  The bigger the points, the greater the connections. This explains the degree of the data.  The difference in the thickness of lines shows how many times a conversation has passed through another conversation between a third party.**
@@ -113,9 +110,10 @@ set_graph_style()
 fn %>% 
 activate(nodes) %>% 
   
-mutate(degree = centrality_degree()) %>% activate(edges) %>%mutate(betweenness = centrality_edge_betweenness()) %>%
-  
-   ggraph(layout = "randomly") +
+mutate(degree = centrality_degree()) %>% 
+  activate(edges) %>% 
+  mutate(betweenness = centrality_edge_betweenness()) %>%
+  ggraph(layout = "randomly") +
   geom_edge_link(aes(alpha = betweenness)) +
   geom_node_point(aes(size = degree, colour = degree)) + 
   scale_color_gradient(guide = "legend")
