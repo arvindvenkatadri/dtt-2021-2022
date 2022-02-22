@@ -6,7 +6,7 @@
     <description>Recent content on Creative Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://our-wondRland.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://our-wondRland.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Name of the work 2</title>
       <link>https://our-wondRland.netlify.app/post/work2/</link>
@@ -95,16 +95,6 @@
       
       <guid>https://our-wondRland.netlify.app/post/work11/</guid>
       <description>&lt;p&gt;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Nidhee Deshak</title>
-      <link>https://our-wondRland.netlify.app/portfolio/2021-07-25-nidhee-deshak/</link>
-      <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://our-wondRland.netlify.app/portfolio/2021-07-25-nidhee-deshak/</guid>
-      <description>IntroductionHello. I am Nidhee Deshak, an oddball who freaks out if my code isn’t running XD. Below are the works that according to me are my best and for which I’ve put in my maximum efforts.
-Graph 1I created a dataset where I chose the famous TV show “Friends”. I chose the six main characters and looked at their sex, relationship status, birthyear and zodiac signs.</description>
     </item>
     
     <item>
@@ -236,6 +226,16 @@ show here.
     </item>
     
     <item>
+      <title>Isha Joshi</title>
+      <link>https://our-wondRland.netlify.app/portfolio/isha-joshi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://our-wondRland.netlify.app/portfolio/isha-joshi/</guid>
+      <description>IntroductionThis workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs. Analyzing and reading data can give so many creative outcomes.
+Graph 1This data is about the adoption of Dogs in the US. The different criteria on which the dogs are adopted is described in this data. The different varieties of breeds and color makes this data interesting.</description>
+    </item>
+    
+    <item>
       <title>MOHIT DASGUPTA</title>
       <link>https://our-wondRland.netlify.app/portfolio/mohit-dasgupta/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -247,7 +247,7 @@ This Dataset is about the IPL auction that happened in the year 2013, It shows t
     </item>
     
     <item>
-      <title>My Work on R</title>
+      <title>Niharika Vinuthan</title>
       <link>https://our-wondRland.netlify.app/portfolio/niharika-vinuthan/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

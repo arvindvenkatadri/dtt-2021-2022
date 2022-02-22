@@ -6,17 +6,7 @@
     <description>Recent content in R on Creative Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://our-wondRland.netlify.app/categories/r/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Nidhee Deshak</title>
-      <link>https://our-wondRland.netlify.app/portfolio/2021-07-25-nidhee-deshak/</link>
-      <pubDate>Fri, 30 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://our-wondRland.netlify.app/portfolio/2021-07-25-nidhee-deshak/</guid>
-      <description>IntroductionHello. I am Nidhee Deshak, an oddball who freaks out if my code isn’t running XD. Below are the works that according to me are my best and for which I’ve put in my maximum efforts.
-Graph 1I created a dataset where I chose the famous TV show “Friends”. I chose the six main characters and looked at their sex, relationship status, birthyear and zodiac signs.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 01 Dec 2020 21:13:14 -0500</lastBuildDate><atom:link href="https://our-wondRland.netlify.app/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello R Markdown</title>
       <link>https://our-wondRland.netlify.app/post/2020-12-01-r-rmarkdown/</link>
@@ -26,6 +16,16 @@
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.</description>
+    </item>
+    
+    <item>
+      <title>Ananya Chandorkar</title>
+      <link>https://our-wondRland.netlify.app/portfolio/ananya-chandorkar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://our-wondRland.netlify.app/portfolio/ananya-chandorkar/</guid>
+      <description>IntroductionMy name is Ananya Chandorkar, I am a 1st year Foundation student who will be pursuing Human Centered Design. I was honored to be in this workshop - Digital Thinking Tools. In this I was introduced to R which initially I found it very difficult but towards the end I saw myself enjoying it and understanding it.
+I have chosen 3 dataset. One is the Galton dataset which I worked on earlier.</description>
     </item>
     
     <item>
@@ -88,6 +88,16 @@ show here.
       <guid>https://our-wondRland.netlify.app/portfolio/hemant-jhunjhunwala/</guid>
       <description>IntroductionHi I am Hemant pursuing foudation studies at Srishti Manipal, and this page has the outcomes of my workshop on R.
 Graph 1 &amp;amp; 2DescriptionI decided to work on creating a Breaking Bad dataset for this project. The show contains good amount of characters to play around with.The show belongs to a unique genre, where they deal with the narcotics industry in the Southern USA.</description>
+    </item>
+    
+    <item>
+      <title>Isha Joshi</title>
+      <link>https://our-wondRland.netlify.app/portfolio/isha-joshi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://our-wondRland.netlify.app/portfolio/isha-joshi/</guid>
+      <description>IntroductionThis workshop taught me something that I would never opt to do on my own. Learning R gave me a new tool to imagine and create new designs. Analyzing and reading data can give so many creative outcomes.
+Graph 1This data is about the adoption of Dogs in the US. The different criteria on which the dogs are adopted is described in this data. The different varieties of breeds and color makes this data interesting.</description>
     </item>
     
     <item>
