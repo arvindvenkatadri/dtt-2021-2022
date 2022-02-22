@@ -1,5 +1,5 @@
 ---
-title: "My Work on R"
+title: "Niharika Vinuthan"
 author: "Niharika Vinuthan"
 date: "20/02/2022"
 slug: []
