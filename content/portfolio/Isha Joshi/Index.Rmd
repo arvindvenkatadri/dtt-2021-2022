@@ -44,7 +44,19 @@ glimpse(Dogs)
 **This graph describes the top 10 breeds which are adopted.**
 
 ```{r plot-1 , echo=FALSE}
-Dogs %>% group_by(breed_primary) %>% count(name="number") %>% arrange (desc(number)) %>% filter(number > 1800) %>% ggplot(data=., aes(x=reorder(breed_primary, number), y=number, fill=breed_primary)) + geom_col() + coord_flip() +labs(title = "Graph of the top breeds of dogs at the centres by number") + scale_fill_brewer(palette="RdYlBu")
+Dogs %>% group_by(breed_primary) %>%
+  count(name = "number") %>%
+  arrange (desc(number)) %>%
+  filter(number > 1800) %>%
+  ggplot(data = ., aes(
+    x = reorder(breed_primary, number),
+    y = number,
+    fill = breed_primary
+  )) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Graph of the top breeds of dogs at the centres by number") +
+  scale_fill_brewer(palette = "RdYlBu")
 
 ```
 
